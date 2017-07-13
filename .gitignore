@@ -10,11 +10,17 @@ data/unshared/*.*
 data/unshared/raw/*
 data/unshared/derived/*
 
+model-output/*.*
+model-output/*/*.*
+model-output/*/*/*.*
+model-output/*/*/*/*.*
 
 ## Exceptions
 !data/unshared/README.md
 !data/unshared/raw/README.md
 !data/unshared/derived/README.md
 
-
+model-output/*/*/*.out
+model-output/*/*/*/*.out
+model-output/*/*/*/*/*.out
 
