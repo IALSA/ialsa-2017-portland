@@ -1,35 +1,49 @@
 # These object definitions are used throughout the repository
 # All of these are stored in the object `model_components`
 
-# model_components <- list(
-#   "id"          = variables_part_1,
-#   "info"        = variables_part_2,
-#   "fixed"       = variables_part_3,
-#   "fixed_key"   = coefficient_key,
-#   "random"      = c(variables_part_4a, variables_part_4b),
-#   "residual"    = c(variables_part_4c, variables_part_4d),
-#   "estimated_r" = variables_part_4e,
-#   "computed_r"  = variables_part_5,
-#   "compute_corr"= variables_part_6,
-#   "process_id"  = variables_part_7
-# )
-
-#### Model identifiers
-
-variables_part_1 <- c(
-  "study_name",
-  "model_number",       # u|b - uni|bi-variate; 0|1|2 - highest curve component
-  "subgroup",           # male & female
-  "model_type",          # 0 , a, ae, aeh, aeh+, & full
-  "process_a",
-  "process_b"
+# This object is created at the end of this script:
+model_components <- list(
+   "id"          = NA # Model identifiers           - variables_part_1
+  ,"info"        = NA # Model information           - variables_part_2
+  ,"fixed"       = NA # Fixed effects (gamma)       - variables_part_3
+  ,"fixed_key"   = NA # Order of predictors         - coefficient_key
+  ,"random"      = NA # Random effects (tau)        - c(variables_part_4a, variables_part_4b)
+  ,"residual"    = NA # Residuals (sigma)           - c(variables_part_4c, variables_part_4d)
+  ,"estimated_r" = NA # (e)stimated co(r)relations  - variables_part_4e
+  ,"computed_r"  = NA # (c)omputed  co(r)relations  - variables_part_5
+  ,"compute_corr"= NA # components to compute corr  - variables_part_6
+  ,"process_id"  = NA # domain structure and labels - variables_part_7
 )
+
+
+# previous version, remove if not using (after replication)
+# variables_part_1 <- c(
+#   "study_name",
+#   "model_number",       # u|b - uni|bi-variate; 0|1|2 - highest curve component
+#   "subgroup",           # male & female
+#   "model_type",          # 0 , a, ae, aeh, aeh+, & full
+#   "process_a",
+#   "process_b"
+# )
+#### Model identifiers
+variables_part_1 <- c(
+  "model_number"       # u|b - uni|bi-variate; 0|1|2 - highest curve component
+  ,"study_name"        # eas, elsa ...
+  ,"subgroup"          # male & female
+  ,"model_type"        # 0 , a, ae, aeh, aeh+, & full
+  ,"process_a"         # fev, pef, grip
+  ,"process_b"         # block, digits_f
+)
+
+
 #### Model information
 variables_part_2 <- c(
-  "subject_count",
-  "parameter_count",
-  "wave_count",
-  'll', "aic", "bic"
+  "subject_count"      # sample size
+  ,"parameter_count"   # number of estimated parameters
+  ,"wave_count"        # number of waves
+  ,'ll'                # log-likelihood
+  ,"aic"               # Akaike information criterion
+  ,"bic"               # Bayesian information criterion
 )
 
 #######################################################################################
@@ -177,15 +191,16 @@ variables_part_5 <- c(
 
 # components in correlation computation
 variables_part_6 <- c(
-   "ab_tau_00_est"       # covar bw (a) - (b)
+  # levels
+   "ab_tau_00_est"       # covar betweew (a) - (b)
   ,"aa_tau_00_est"       # var (a)
   ,"bb_tau_00_est"       # var (b)
-
-  ,"ab_tau_11_est"       # covar bw (a) - (b)
+  # slopes
+  ,"ab_tau_11_est"       # covar betweew (a) - (b)
   ,"aa_tau_11_est"       # var (a)
   ,"bb_tau_11_est"       # var (b)
-
-  ,"ab_sigma_00_est"     # covar bw (a) - (b)
+  # residuals
+  ,"ab_sigma_00_est"     # covar betweew (a) - (b)
   ,"a_sigma_00_est"      # var (a)
   ,"b_sigma_00_est"      # var (b)
 )
@@ -199,15 +214,14 @@ variables_part_7 <- c(
 )
 # Now putting it all together
 model_components <- list(
-  "id"          = variables_part_1,
-  "info"        = variables_part_2,
-  "fixed"       = variables_part_3,
-  "fixed_key"   = coefficient_key,
-  "random"      = c(variables_part_4a, variables_part_4b),
-  "residual"    = c(variables_part_4c, variables_part_4d),
-  "estimated_r" = variables_part_4e,
-  "computed_r"  = variables_part_5,
-  "compute_corr"= variables_part_6,
-  "process_id"  = variables_part_7
+  "id"           = variables_part_1                        # Model identifiers            
+  ,"info"        = variables_part_2                        # Model information            
+  ,"fixed"       = variables_part_3                        # Fixed effects (gamma)        
+  ,"fixed_key"   = coefficient_key                         # Order of predictors          
+  ,"random"      = c(variables_part_4a, variables_part_4b) # Random effects (tau)         
+  ,"residual"    = c(variables_part_4c, variables_part_4d) # Residuals (sigma)            
+  ,"estimated_r" = variables_part_4e                       # (e)stimated co(r)relations        
+  ,"computed_r"  = variables_part_5                        # (c)omputed  co(r)relations       
+  ,"compute_corr"= variables_part_6                        # components to compute corr       
+  ,"process_id"  = variables_part_7                        # domain structure and labels      
 )
-# rm(list=setdiff(ls(), "model_components"))

@@ -15,14 +15,20 @@ source("./scripts/mplus/extraction-functions-auto.R")
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) #Pipes
-library(MplusAutomation)
-library(IalsaSynthesis)
+# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+requireNamespace("ggplot2") # graphing
+requireNamespace("tidyr")   # data wrangling
+requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+requireNamespace("testit")  # asserting conditions meet expected patterns.
+requireNamespace("readr")   # input and output of data
+
 # ---- declare_globals ---------------------------------------------------------
 path_input   <- "./model-output/physical-physical/0-catalog-raw"
 path_save  <- "./model-output/physical-physical/1-catalog-clean"
 
 # ---- load_data ---------------------------------------------------------------
-catalog <- read.csv(paste0(path_input,".csv"), header = T,  stringsAsFactors=FALSE)
+# catalog <- read.csv(paste0(path_input,".csv"), header = T,  stringsAsFactors=FALSE)
+catalog <- readr::read_csv(paste0(path_input,".csv"),col_names = TRUE)
 
 # ---- tweak_data --------------------------------------------------------------
 colnames(catalog)

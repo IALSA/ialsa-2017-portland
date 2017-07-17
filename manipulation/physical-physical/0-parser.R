@@ -17,6 +17,11 @@ source("./scripts/mplus/extraction-functions-auto.R")
 library(magrittr) #Pipes
 library(MplusAutomation)
 library(IalsaSynthesis)
+# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+requireNamespace("ggplot2") # graphing
+requireNamespace("tidyr")   # data wrangling
+requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+requireNamespace("testit")  # asserting conditions meet expected patterns.
 
 # ---- declare-globals ---------------------------------------------------
 path_folder <- "./model-output/physical-physical/studies/"
