@@ -1,61 +1,52 @@
-# knitr::stitch_rmd(script="./manipulation/rename-classify.R", output="./manipulation/rename-classify.md")
+# The purpose of this script is to clean the raw catalog
+
+# run the line below to stitch a basic html output. For elaborated report, run the corresponding .Rmd file
+# knitr::stitch_rmd(script="./manipulation/0-ellis-island.R", output="./manipulation/stitched-output/0-ellis-island.md")
 #These first few lines run only when the file is run in RStudio, !!NOT when an Rmd/Rnw file calls it!!
 rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
+cat("\f") # clear console
 
-# ---- load_sources ------------------------------------------------------------
+# ---- load-sources ------------------------------------------------------------
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
-base::source("./scripts/mplus/group-variables.R")
-base::source("./scripts/mplus/extraction-functions.R") # includes renaming
-# ---- load_packages -----------------------------------------------------------
+source("./scripts/mplus/group-variables.R")
+source("./scripts/mplus/extraction-functions-auto.R")
+# source("./scripts/common-functions.R")
+
+# ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) #Pipes
-
-# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("ggplot2", quietly=TRUE)
-requireNamespace("dplyr", quietly=TRUE) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
-requireNamespace("testit", quietly=TRUE)
-# requireNamespace("plyr", quietly=TRUE)
-
+library(MplusAutomation)
+library(IalsaSynthesis)
 # ---- declare_globals ---------------------------------------------------------
-# path_input  <- "./data-phi-free/raw/results-physical-cognitive.csv"
-# path_input <- paste0("./data/shared/parsed-results-pc-",study,".csv")
-# path_input  <- "./data/shared/parsed-results.csv"
-# path_input <- "./data/shared/parsed-results-raw.csv"
-# path_output <- "./data/shared/parsed-results.rds"
-# path_output_csv <- "./data/shared/parsed-results-mapped.csv"
-figure_path <- './manipulation/stitched_output/'
-
-path_input   <- "./data/shared/pp-0-parsed-results-raw.csv"
-path_output  <- "./data/shared/pp-1-parsed-results.csv"
+path_input   <- "./model-output/physical-physical/0-catalog-raw"
+path_save  <- "./model-output/physical-physical/1-catalog-clean"
 
 # ---- load_data ---------------------------------------------------------------
-ds0 <- read.csv(path_input, header = T,  stringsAsFactors=FALSE)
-# ds0 <- ds0[ds0$study_name==study,]
+catalog <- read.csv(paste0(path_input,".csv"), header = T,  stringsAsFactors=FALSE)
 
 # ---- tweak_data --------------------------------------------------------------
-colnames(ds0)
-# ds <- ds0 %>% dplyr::arrange_("model_type", "process_a") %>%
-# dplyr::select_("study_name", "model_number","subgroup","model_type","process_a", "process_b")
-ds <- ds0
+colnames(catalog)
+ds <- catalog %>% dplyr::arrange_("model_type", "process_a") %>%
+  dplyr::select_("study_name", "model_number","subgroup","model_type","process_a", "process_b")
+
+# assing alias
+ds <- catalog
 
 # ----- load-rename-classify-mapping -------------------------------------
-ds_rules <- read.csv("./manipulation/rename-classify-rules.csv", stringsAsFactors = F) %>%
+ds_rules <- read.csv("./data/public/raw/rename-classify-rules.csv", stringsAsFactors = F) %>%
   dplyr::select(-notes,-mplus_name)
 
-# ---- spell_model_number ------------------------------------------------------
+# ---- spell-model_number ------------------------------------------------------
 t <- table(ds$model_number, ds$study_name);t[t==0]<-".";t
 
-
-# ---- spell_subgroup ---------------------------------------------------------
+# ---- spell-subgroup ---------------------------------------------------------
 t <- table(ds$subgroup, ds$study_name);t[t==0]<-".";t
 
-
-
-# ---- spell_model_type -------------------------------------------
+# ---- spell-model_type -------------------------------------------
 t <- table(ds$model_type, ds$study_name);t[t==0]<-".";t
 
 
-# ---- correct_model_type ------------------------------------------------------
+# ---- correct-model_type ------------------------------------------------------
 # extract the specific renaming rule
 d_rule <- ds_rules %>%
   dplyr::filter(category == "model_type") %>%
@@ -67,12 +58,7 @@ ds <- ds %>%
 # verify
 t <- table(ds$entry_new, ds$study_name);t[t==0]<-".";t
 t <- table(ds$model_type, ds$entry_new);t[t==0]<-".";t # raw rows, new columns
-
-# # Remove the old variable, and rename the cleaned/condensed variable.
-# ds <- ds %>%
-#   dplyr::select(-model_type) %>% # remove original entries
-#   dplyr::rename("model_type"="category_short") # replace by corrected entries
-head(ds)
+# head(ds)
 # Replace raw entries with new entries
 ds <- ds %>%
   dplyr::mutate_("model_type"="entry_new") %>%
@@ -80,10 +66,10 @@ ds <- ds %>%
 t <- table(ds$model_type, ds$study_name); t[t==0]<-"."; t
 
 
-# ---- spell_process_a -------------------------------------------------
+# ---- spell-process_a -------------------------------------------------
 t <- table(ds$process_a, ds$study_name); t[t==0]<-"."; t
 
-# ---- correct_process_a ------------------------------------------------
+# ---- correct-process_a ------------------------------------------------
 # extract the specific renaming rule
 d_rule <- ds_rules %>%
   dplyr::filter(category == "physical") %>%
@@ -104,8 +90,7 @@ ds <- ds %>%
 t <- table(ds$process_a, ds$study_name); t[t==0]<-"."; t
 
 
-
-# ---- spell_process_b -------------------------------------------------
+# ---- spell-process_b -------------------------------------------------
 t <- table(ds$process_b, ds$study_name); t[t==0]<-"."; t
 d <- ds %>%
   dplyr::group_by_("study_name","process_b") %>%
@@ -114,7 +99,7 @@ d <- ds %>%
   dplyr::arrange_("study_name")
 knitr::kable(d)
 
-# ---- correct_process_b ------------------------------------------------
+# ---- correct-process_b ------------------------------------------------
 # extract the specific renaming rule
 d_rule <- ds_rules %>%
   dplyr::filter(category == "physical") %>%
@@ -140,28 +125,20 @@ ds <- ds %>%
 # verify
 t <- table(ds$process_b_row, ds$study_name); t[t==0]<-"."; t
 
-# t <- table(ds$process_b, ds$study_name); t[t==0]<-"."; t
-
-# d <- ds %>% dplyr::filter(is.na(process_b)) # remove unidentified measures
-# show unidentified measures only
-# t <- table(d$process_b, d$study_name); t[t==0]<-"."; t
-
-# ---- test_cog_measures ---------------------------------------
+# ---- test_process_b ---------------------------------------
 t <- table(ds$process_b, ds$study_name);t[t==0]<-".";t
 d <- ds %>% dplyr::group_by_("process_b","study_name") %>% dplyr::summarize(count=n())
 d <- d %>% dplyr::ungroup() %>% dplyr::arrange_("study_name")
 knitr::kable(d)
 
-# ---- test_cog_domain -----------------------------------------
+# ---- test-process_b_domain -----------------------------------------
 t <- table(ds$process_b, ds$process_b_domain);t[t==0]<-".";t
 
 # ---- standardize-names -------------------------
-ds <- rename_columns_in_catalog(ds)
+catalog <- rename_columns_in_catalog(ds)
 
-# ---- export_ready_data ---------------------------------------
-# saveRDS(ds, path_output)
-readr::write_csv(ds,path_output)
-
+# ---- save-to-disk ------------------------------------------------------------
+write.csv(catalog,  paste0(path_save,".csv"), row.names=F)
 
 
 
