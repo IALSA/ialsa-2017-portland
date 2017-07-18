@@ -1,4 +1,4 @@
-# The purpose of this script is to transform the wide catalog into long catalog.
+# The purpose of this script is to print various tabulations of model results
 
 # run the line below to stitch a basic html output. For elaborated report, run the corresponding .Rmd file
 # knitr::stitch_rmd(script="./manipulation/0-ellis-island.R", output="./manipulation/stitched-output/0-ellis-island.md")
