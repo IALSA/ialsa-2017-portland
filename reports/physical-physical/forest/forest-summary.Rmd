@@ -1,15 +1,15 @@
 ---
-title: 'BISR: Focus report'
+title: 'BISR: dynamic summary'
 output:
+  html_document:
+    css: ~/GitHub/IALSA-2015-Portland/libs/css/sidebar_narrow.css
+    toc: yes
   word_document:
     toc: no
-  html_document:
-    keep_md: no
-    toc: yes
 date: 'Date: `r Sys.Date()`'
 ---
 
-<!--  Set the working directory to the repository's base directory; this assumes the report is nested inside of two directories.-->
+<!--  Set the working directory to the repository's base directory; this assumes the report is nested inside of two directories.--> 
 ```{r, echo=F, message=F} 
 # cat("Working directory: ", getwd())
 library(knitr)
@@ -23,9 +23,10 @@ opts_chunk$set(
   results    = 'show', 
   comment    = NA, 
   tidy       = FALSE,
-  fig.width  = 4, 
-  fig.height = 4, 
-  fig.path   = 'figure-png/'
+  # fig.width  = 4, 
+  # fig.height = 4, 
+  fig.path   = 'figure_rmd/pulmonary/',
+  aliases = c(h = 'fig.height', w = 'fig.width', ow = "out.width")
 )
 # dpi = 400,
 # out.width = "650px", #This affects only the markdown, not the underlying png file.  The height will be scaled appropriately.
@@ -67,39 +68,46 @@ read_chunk("./reports/physical-physical/forest/forest.R") #This allows knitr to 
 ```
 
 
-```{r select-track, echo=echoChunks, message=TRUE,eval=TRUE}
-# track <- "grip"
-# track <- "gait"
-# track <- "pulmonary"
-```
-
-
-```{r select-data, echo=echoChunks, message=TRUE,eval=TRUE}
-```
-
 ## Legend
 
-- `Corr(Levels)Est` = correlation between intercepts (factor scores) of two processes
-- `Corr(Slopes)Est` = correlation between linear slopes (factor scores) of two processes
-- `Corr(Resid)Est`  = correlation between residuals of two processes
-
-Correlations have been computed withing Mplus. 
+The column `covariance` contains four ways in which the association between processes can be reported:  
+- `Correlation` = correlation , estimated in Mplus  
+- `Correlation CI` = Confidence intervals estimated in Mplus  
+- `Covariance` = raw covariance  
+- `Fisher's R` = correlation, computed outside of Mplus using Fisher's transform from raw variances and covariances
 
 Note: cases in which restricted (co)variances or insufficient decimals prevent the computation of correlations are marked by `---`
 
-**Correlations** are reported in the form : **`est(se) pval star`**     
-where      
+**Raw covariance** and **estimated correlations** are reported in the form : **`est(se) pval star`**,where         
 - `est` is the covariance estimate on the original metric   
 - `se` is the standard error on the original metric  
 - `pval` is the p-value associated with the raw covariance  
 - `star` is significance indicator associated with corresponding covariance estimate, with  `.`, `*`, `**`, and `***` indicating significance at `.10`, `.05`, `.01`, and `.001` alpha levels, respectively
 
-```{r table-static-full, echo=echoChunks, message=TRUE, results='asis', eval=FALSE}
+**Confidence intervals** for estimated correlations are reported in the form: **`(low,high)`**,where   
+- `low` - bottom boundry of the 95% confidence interval
+- `high` - top boundry of the 95% confidence interval
+
+**Computed correlations** are reported in the form: **`est(low, high)`**, where      
+- `est` is the correlation coefficient computed from raw (co)variances using Fisher transfrom   
+- `low` and `high` are the 95% confidence intervals associated with the computed correlations  
+
+
+```{r select-track, echo=echoChunks, message=TRUE,eval=TRUE}
+# track <- "gait"
+# track <- "grip"
+track <- "pulmonary"
 ```
 
-```{r table-static-focus, echo=echoChunks, message=TRUE, results='asis', eval=TRUE}
+# Dynamic Summary
+```{r table-dynamic, echo=echoChunks, message=TRUE, results='show', eval=T, message=F}
 ```
 
+```{r print-forest, echo=echoChunks, message=F, results='asis', eval=F,  warning=F, w= 10, dpi=220, ow = "950px"}
+```
+
+```{r place-forest, echo=echoChunks, message=F, results='asis', eval=T,  warning=F}
+```
 
 
 # Session Information

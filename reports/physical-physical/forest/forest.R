@@ -40,7 +40,7 @@ catalog_wide <- readr::read_csv(path_catalog_wide,col_names = TRUE)
 catalog_long <- readr::read_csv(path_catalog_long,col_names = TRUE)
 
 # ---- inspect-data ---------------------------
-catalog_wide %>% dplyr::glimpse()
+# catalog_wide %>% dplyr::glimpse()
 
 # ---- tweak-data --------------------
 # perform custom touch-up, local to physical-physical track
@@ -63,7 +63,8 @@ catalog_wide <- catalog_wide %>%
   dplyr::mutate(domain = pair)
   # dplyr::select(-pair) 
 
-catalog_wide %>% glimpse()
+# catalog_wide %>% glimpse()
+# catalog_wide %>% distinct(pair)
 # ---- dummy -------------------
 # library(dplyr)
 # catalog_wide %>%
@@ -93,8 +94,8 @@ catalog_wide %>% glimpse()
 #   dplyr::summarize(count=n()) %>%
 #   dplyr::arrange(count)
 
-catalog_wide %>% 
-  dplyr::distinct(process_a, process_b)
+# catalog_wide %>% 
+#   dplyr::distinct(process_a, process_b)
 
 # ---- save-data-for-tables --------------------------
 # prepare data for saving
@@ -198,16 +199,16 @@ d <- d %>%
 change_to_factors <- setdiff(colnames(d),"N" )
 d[,change_to_factors] <- lapply(d[,change_to_factors], factor)
 
-# d %>%
-#   DT::datatable(
-#     class     = 'cell-border stripe',
-#     # caption   = "Table of Correlations",
-#     filter    = "top",
-#     options   = list(pageLength = 6, autoWidth = TRUE)
-#   )
+d %>%
+  DT::datatable(
+    class     = 'cell-border stripe',
+    # caption   = "Table of Correlations",
+    filter    = "top",
+    options   = list(pageLength = 6, autoWidth = TRUE)
+  )
 
 
-catalog_wide %>% glimpse()
+# catalog_wide %>% glimpse()
 
 
 # ----- print-forest  --------------------------------
@@ -277,8 +278,8 @@ jpegs <- list.files(path_folder, full.names = T)
 lst <- list()
 regex_pattern <- "(\\w+)-(.+)-(\\w+)-(\\w+).jpg$"
 for(i in seq_along(jpegs)){
-  (lst[["track"]][i]    = sub(regex_pattern,"\\1", basename(jpegs[i]) ) )
-  (lst[["domain"]][i]   = sub(regex_pattern,"\\2", basename(jpegs[i]) ) )
+  # (lst[["track"]][i]    = sub(regex_pattern,"\\1", basename(jpegs[i]) ) )
+  (lst[["domain"]][i]   = sub(regex_pattern,paste0("\\1","-","\\2"), basename(jpegs[i]) ) )
   (lst[["subgroup"]][i] = sub(regex_pattern,"\\3", basename(jpegs[i]) ) )
   (lst[["index"]][i]    = sub(regex_pattern,"\\4", basename(jpegs[i]) ) )
   (lst[["path"]][i]     = sub("[./]","../../..",jpegs[i]))
@@ -326,17 +327,16 @@ for(gender in c("male","female")){
       model_number == "b1"
     ) %>%
     prettify_catalog() %>%
-    select_for_table(track,gender = gender,format = "full")
+    select_for_table(track="all",gender = gender,format = "full")
   # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    dplyr::mutate() %>%
-    # dplyr::arrange(domain,study,cognitive ) %>%
-    dplyr::arrange(domain,study,process_b ) %>%
-    knitr::kable(
+    dplyr::arrange(domain,study,process_a, process_b ) %>%
+        knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c",  "r","l","r","l",  "r","l","r","l",  "r","l","r","l") # cognitive full
+      # align      = c(    "l","r","l","c",  "r","l","r","l",  "r","l","r","l", "r","l","r","l") # physical full
       # align      = c(     "l", "r", "l", "c", "r","l","r","l","r","l") # physical
     ) %>%
     print()
@@ -350,16 +350,16 @@ for(gender in c("male","female")){
       model_number == "b1"
     ) %>%
     prettify_catalog() %>%
-    select_for_table(track,gender = gender,format = "full")
+    select_for_table(track="all",gender = gender,format = "full")
   # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    # dplyr::arrange(study,domain,cognitive) %>%
-    dplyr::arrange(study,domain,process_b) %>%
+    dplyr::arrange(study,domain, process_a, process_b ) %>%
     knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c",  "r","l","r","l",  "r","l","r","l", "r","l","r","l") # cognitive full
+      # align      = c(    "l","r","l","c",  "r","l","r","l",  "r","l","r","l", "r","l","r","l") # physical full
       # align      = c(     "l", "r", "l", "c", "r","l","r","l","r","l") # physical
     ) %>%
     print()
@@ -376,13 +376,12 @@ for(gender in c("male","female")){
       model_number == "b1"
     ) %>%
     prettify_catalog() %>%
-    select_for_table(track,gender = gender,format = "focus")
+    select_for_table(track="all",gender = gender,format = "focus")
   # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    # dplyr::arrange(domain,study,cognitive ) %>%
-    dplyr::arrange(domain,study,process_b ) %>%
+    dplyr::arrange(domain,study,process_a, process_b ) %>%
     knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c", "l","l","l") # cognitive
@@ -399,13 +398,12 @@ for(gender in c("male","female")){
       model_number == "b1"
     ) %>%
     prettify_catalog() %>%
-    select_for_table(track,gender = gender,format = "focus")
+    select_for_table(track="all",gender = gender,format = "focus")
   # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    # dplyr::arrange(study,domain,cognitive) %>%
-    dplyr::arrange(domain,study,process_b ) %>%
+    dplyr::arrange(study, domain, process_a, process_b ) %>%
     knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c", "l","l","l") # cognitive

@@ -228,10 +228,10 @@ select_for_table <- function(
      if(pretty_name){
       d4 <- d4 %>%
         dplyr::rename_(
-          "Study"               = "study_name",
+          "study"               = "study_name",
           "$n$"                 = "subject_count",
-          "Process A"           = "process_a",
-          "Process B"           = "process_b",
+          # "Process A"           = "process_a",
+          # "Process B"           = "process_b",
           "Cov(Levels)"         = "tau_levels",       # Covariance             est(se)pval
           "Cov(Slopes)"         = "tau_slopes",
           "Cov(Residuals)"      = "tau_resid",
