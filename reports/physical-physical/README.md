@@ -63,33 +63,33 @@ For  details see [model specification](../../reports/model-specification/README.
 
 <!-- Below stored the short-cuts for links -->  
 
-  [corr_focus]:https://rawgit.com/IALSA/ialsa-2017-Portland/master/reports/physical-physical/forest/focus.docx
-   [corr_full]:https://rawgit.com/IALSA/ialsa-2017-Portland/master/reports/physical-physical/forest/full.docx
-[corr_dynamic]:https://rawgit.com/IALSA/ialsa-2017-Portland/master/reports/physical-physical/forest/summary.html
-  [domain_map]:https://rawgit.com/IALSA/ialsa-2017-Portland/master/reports/physical-physical/domain-map/domain-map-pulmonary.html
-  [table-data]:https://github.com/IALSA/ialsa-2017-Portland/tree/master/reports/physical-physical/forest/table-data
+  [corr_focus]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/forest/forest-focus.docx
+   [corr_full]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/forest/forest-full.docx
+[corr_dynamic]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/forest/forest-summary.html
+  [domain_map]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/domain-map/domain-map-pulmonary.html
+  [table-data]:https://github.com/IALSA/ialsa-2017-portland/tree/master/reports/physical-physical/forest/table-data
   
-  [eas_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_EAS_Descriptives_IALSA_Portland.pdf 
- [elsa_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_ELSA_Descriptives_IALSA_Portland.pdf   
-  [hrs_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_HRS_Descriptives_IALSA_Portland.pdf 
- [ilse_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_ILSE_Descriptives_IALSA_Portland.pdf 
- [lasa_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_LASA_Descriptives_IALSA_Portland.pdf  
-  [map_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_MAP_Descriptives_IALSA_Portland.pdf
-  [nas_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_NAS_Descriptives_IALSA_Portland.pdf 
-[nuage_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_NuAge_Descriptives_IALSA_Portland.pdf 
- [octo_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_OCTO_Descriptives_IALSA_Portland.pdf 
-[satsa_table_1]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
+  [eas_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_EAS_Descriptives_IALSA_Portland.pdf 
+ [elsa_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_ELSA_Descriptives_IALSA_Portland.pdf   
+  [hrs_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_HRS_Descriptives_IALSA_Portland.pdf 
+ [ilse_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_ILSE_Descriptives_IALSA_Portland.pdf 
+ [lasa_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_LASA_Descriptives_IALSA_Portland.pdf  
+  [map_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_MAP_Descriptives_IALSA_Portland.pdf
+  [nas_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NAS_Descriptives_IALSA_Portland.pdf 
+[nuage_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NuAge_Descriptives_IALSA_Portland.pdf 
+ [octo_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_OCTO_Descriptives_IALSA_Portland.pdf 
+[satsa_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
 
-  [eas_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-eas.docx     
- [elsa_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-elsa.docx   
-  [hrs_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-hrs.docx     
- [ilse_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-ilse.docx   
- [lasa_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-lasa.docx   
-  [nas_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-nas.docx   
-[nuage_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-nuage.docx 
-  [map_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-map.docx     
- [octo_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-octo.docx   
-[satsa_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-satsa.docx   
+  [eas_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-eas.docx     
+ [elsa_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-elsa.docx   
+  [hrs_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-hrs.docx     
+ [ilse_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-ilse.docx   
+ [lasa_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-lasa.docx   
+  [nas_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-nas.docx   
+[nuage_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-nuage.docx 
+  [map_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-map.docx     
+ [octo_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-octo.docx   
+[satsa_word]:https://rawgit.com/IALSA/ialsa-2017-portland/master/reports/physical-physical/tabulations/seeds-pulmonary/seed-satsa.docx   
 
 
 
