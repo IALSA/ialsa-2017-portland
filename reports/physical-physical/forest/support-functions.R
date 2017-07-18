@@ -315,7 +315,8 @@ save_corr_table <- function(
   d <- catalog_pretty %>%
     select_for_table(track=track, gender=gender, format=format)
   # folder <- "./reports/correlation-3/summary-data/"
-  path <- paste0(folder,track,"-",gender,"-",format,".csv")
+  # path <- paste0(folder,track,"-",gender,"-",format,".csv")
+  path <- paste0(folder,format,".csv")
   readr::write_csv(d,path)
 }
 
