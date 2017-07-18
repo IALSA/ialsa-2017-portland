@@ -96,7 +96,7 @@ path <- list_path_out[["nuage"]][1]
 # remove models that did not terminate normaly
 # at this point, detection is manual
 a <- list_path_out[["elsa"]]
-b <- a[grepl("b1_female_aehplus_grip_gait.out$", a)]
+b <- a[grepl("b1_female_aehplus_grip_gait.out$|b1_male_aehplus_grip_gait.out$", a)]
 list_path_out[["elsa"]] <- setdiff(list_path_out[["elsa"]], b)
 
 # ---- parse-model-outputs --------------------------------------------
