@@ -10,10 +10,13 @@ data/unshared/*.*
 data/unshared/raw/*
 data/unshared/derived/*
 
-model-output/*.*
-model-output/*/*.*
-model-output/*/*/*.*
-model-output/*/*/*/*.*
+model-output/*
+model-output/*/*
+model-output/*/*/*
+model-output/*/*/*/*
+model-output/*/*/*/*/*
+model-output/*/*/*/*/*/*
+model-output/*/*/*/*/*/*/*
 
 ## Exceptions
 !data/unshared/README.md
