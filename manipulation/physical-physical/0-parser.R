@@ -38,7 +38,7 @@ requireNamespace("testit") #For asserting conditions meet expected patterns.
 # takes in a vector of paths and collects model results from the .out file
 
 collect_one_study <- function(
-   lst          # list object (brocken by studies) with paths to model outputs
+   lst          # list object (broken by studies) with paths to model outputs
   ,study        # name of the study to be passed for extraction
   ,column_names # character vector with names of items to be extracted from the output
   ,save_folder  # folder where the extracted results shall be placed
@@ -55,8 +55,8 @@ collect_one_study <- function(
   names(results) <- column_names
   #  populate the `results` mold for all models of a given study
   for(i in seq_along(lst[[study]]) ){
-    # for(i in 50:50){
-    # i <- 3; study = "elsa"
+    # for(i in 50:50){        # for testing and dev
+    # i <- 3; study = "elsa"  # for testing and dev
     (collected <- collect_result(path = lst[[study]][i] ) )
     (collected_names <- names(collected))
     results[i, collected_names] <- collected
@@ -76,14 +76,14 @@ collect_one_study <- function(
 # ---- load-data ---------------------------------------------------------------
 # create a list object broken by study, containing paths to model outputs
 list_path_out <-list(
-   "eas"   = list.files(file.path(path_folder,"eas"),full.names=T, recursive=T, pattern="out$")
-  ,"elsa"  = list.files(file.path(path_folder,"elsa"),full.names=T, recursive=T, pattern="out$")
-  ,"hrs"   = list.files(file.path(path_folder,"hrs"),full.names=T, recursive=T, pattern="out$")
-  ,"ilse"  = list.files(file.path(path_folder,"ilse"),full.names=T, recursive=T, pattern="out$")
-  ,"lasa"  = list.files(file.path(path_folder,"lasa"),full.names=T, recursive=T, pattern="out$")
-  ,"map"   = list.files(file.path(path_folder,"map"),full.names=T, recursive=T, pattern="out$")
+   "eas"   = list.files(file.path(path_folder,"eas")  ,full.names=T, recursive=T, pattern="out$")
+  ,"elsa"  = list.files(file.path(path_folder,"elsa") ,full.names=T, recursive=T, pattern="out$")
+  ,"hrs"   = list.files(file.path(path_folder,"hrs")  ,full.names=T, recursive=T, pattern="out$")
+  ,"ilse"  = list.files(file.path(path_folder,"ilse") ,full.names=T, recursive=T, pattern="out$")
+  ,"lasa"  = list.files(file.path(path_folder,"lasa") ,full.names=T, recursive=T, pattern="out$")
+  ,"map"   = list.files(file.path(path_folder,"map")  ,full.names=T, recursive=T, pattern="out$")
   ,"nuage" = list.files(file.path(path_folder,"nuage"),full.names=T, recursive=T, pattern="out$")
-  ,"octo"  = list.files(file.path(path_folder,"octo"),full.names=T, recursive=T, pattern="out$")
+  ,"octo"  = list.files(file.path(path_folder,"octo") ,full.names=T, recursive=T, pattern="out$")
   ,"satsa" = list.files(file.path(path_folder,"satsa"),full.names=T, recursive=T, pattern="out$")
 )
 
@@ -100,6 +100,7 @@ b <- a[grepl("b1_female_aehplus_grip_gait.out$|b1_male_aehplus_grip_gait.out$", 
 list_path_out[["elsa"]] <- setdiff(list_path_out[["elsa"]], b)
 
 # ---- parse-model-outputs --------------------------------------------
+# do not combine into a loop for convenient, disjoint usage
 collect_one_study(list_path_out,"eas",   selected_results, path_folder)
 collect_one_study(list_path_out,"elsa",  selected_results, path_folder)
 collect_one_study(list_path_out,"hrs",   selected_results, path_folder)
