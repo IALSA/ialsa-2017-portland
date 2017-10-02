@@ -10,21 +10,27 @@ data/unshared/*.*
 data/unshared/raw/*
 data/unshared/derived/*
 
-model-output/*
-model-output/*/*
-model-output/*/*/*
-model-output/*/*/*/*
-model-output/*/*/*/*/*
-model-output/*/*/*/*/*/*
-model-output/*/*/*/*/*/*/*
+model-output/*.*
+model-output/*/*.*
+model-output/*/*/*.*
+model-output/*/*/*/*.*
+model-output/*/*/*/*/*.*
+model-output/*/*/*/*/*/*.*
+model-output/*/*/*/*/*/*/*.*
 
 ## Exceptions
 !data/unshared/README.md
 !data/unshared/raw/README.md
 !data/unshared/derived/README.md
 
+!model-output/*/README.md
+
 model-output/*/*/*.out
 model-output/*/*/*/*.out
 model-output/*/*/*/*/*.out
 
 model-output.rar
+model-output/physical-cognitive/studies/nuage/grip-2016-11-11/NuAge_gripmmms_female_Slopes
+model-output/physical-cognitive/studies/nuage/grip-2016-11-11/NuAge_gripmmms_male_Slopes
+model-output/physical-cognitive/studies/nuage/grip-2016-11-11/NuAge_gripmmse_female_Slopes
+model-output/physical-cognitive/studies/nuage/grip-2016-11-11/NuAge_gripmmse_male_Slopes
