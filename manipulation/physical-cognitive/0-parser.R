@@ -25,7 +25,7 @@ requireNamespace("testit")  # asserting conditions meet expected patterns.
 
 # ---- declare-globals ---------------------------------------------------
 path_folder <- "./model-output/physical-cognitive/studies/"
-path_save <- "./model-output/physical-physical/0-catalog-raw"
+path_save <- "./model-output/physical-cognitive/0-catalog-raw"
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 requireNamespace("ggplot2")
@@ -44,9 +44,9 @@ collect_one_study <- function(
   ,save_folder  # folder where the extracted results shall be placed
 ){
   ## Values for testing and development
-  # paths_out    <- list_path_out[["eas"]]
+  # paths_out    <- list_path_out[["lasa"]]
   # lst          <- list_path_out
-  # study        <- "elsa"
+  # study        <- "lasa"
   # column_names <- selected_results
   # save_folder  <- path_folder
   
@@ -56,7 +56,7 @@ collect_one_study <- function(
   #  populate the `results` mold for all models of a given study
   for(i in seq_along(lst[[study]]) ){
     # for(i in 50:50){        # for testing and dev
-    # i <- 3; study = "elsa"  # for testing and dev
+    # i <- 3; study = "lasa"  # for testing and dev
     (collected <- collect_result(path = lst[[study]][i] ) )
     (collected_names <- names(collected))
     results[i, collected_names] <- collected
@@ -72,7 +72,11 @@ collect_one_study <- function(
 #   ,column_names = selected_results                       
 #   ,save_folder  = path_folder                     
 # )
-
+path <- "./model-output/physical-cognitive/studies//lasa/grip_max-coding_max/b1_female_a_grip_max_coding_max.out"
+path <- list_path_out[["lasa"]][1]
+path <- list_path_out[["nuage"]][1]
+path <- list_path_out[["octo"]][1]
+a <- collect_result(path)
 # ---- load-data ---------------------------------------------------------------
 # create a list object broken by study, containing paths to model outputs
 list_path_out <-list(
@@ -89,15 +93,26 @@ list_path_out <-list(
 
 # ---- inspect-data ------------------------------------------------
 list_path_out[["elsa"]]
-path <- list_path_out[["elsa"]][1]
+path <- list_path_out[["lasa"]][1]
+path <- list_path_out[["map"]][1]
 path <- list_path_out[["nuage"]][1]
 
 # ---- tweak-data --------------------------------------------------
 # remove models that did not terminate normaly
 # at this point, detection is manual
-a <- list_path_out[["elsa"]]
-b <- a[grepl("b1_female_aehplus_grip_gait.out$|b1_male_aehplus_grip_gait.out$", a)]
-list_path_out[["elsa"]] <- setdiff(list_path_out[["elsa"]], b)
+# a <- list_path_out[["elsa"]]
+# b <- a[grepl("b1_female_aehplus_grip_gait.out$|b1_male_aehplus_grip_gait.out$", a)]
+# list_path_out[["elsa"]] <- setdiff(list_path_out[["elsa"]], b)
+
+
+##########################
+# N   O   T   I   C   E  #
+##########################
+
+# AT THIS POINT THE EXTRACTION BREAKS DOWN ON LASA AND MAP
+# THE RAW CATALOG HAS BEEN TAKEN FROM PORTLAND-2015
+# RETURN HERE WHEN HAVE MORE TIME TO DEBUG EXTRACTION
+
 
 # ---- parse-model-outputs --------------------------------------------
 # do not combine into a loop for convenient, disjoint usage
@@ -105,8 +120,8 @@ collect_one_study(list_path_out,"eas",   selected_results, path_folder)
 collect_one_study(list_path_out,"elsa",  selected_results, path_folder)
 collect_one_study(list_path_out,"hrs",   selected_results, path_folder)
 collect_one_study(list_path_out,"ilse",  selected_results, path_folder)
-collect_one_study(list_path_out,"lasa",  selected_results, path_folder)
-collect_one_study(list_path_out,"map",   selected_results, path_folder)
+# collect_one_study(list_path_out,"lasa",  selected_results, path_folder)
+# collect_one_study(list_path_out,"map",   selected_results, path_folder)
 collect_one_study(list_path_out,"nuage", selected_results, path_folder)
 collect_one_study(list_path_out,"octo",  selected_results, path_folder)
 collect_one_study(list_path_out,"satsa", selected_results, path_folder)
