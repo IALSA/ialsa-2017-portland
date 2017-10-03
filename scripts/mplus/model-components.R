@@ -2,6 +2,7 @@
 # All of these are stored in the object `model_components`
 
 # This object is created at the end of this script:
+#   component           label                         list of column names
 model_components <- list(
    "id"          = NA # Model identifiers           - variables_part_1
   ,"info"        = NA # Model information           - variables_part_2
@@ -15,16 +16,6 @@ model_components <- list(
   ,"process_id"  = NA # domain structure and labels - variables_part_7
 )
 
-
-# previous version, remove if not using (after replication)
-# variables_part_1 <- c(
-#   "study_name",
-#   "model_number",       # u|b - uni|bi-variate; 0|1|2 - highest curve component
-#   "subgroup",           # male & female
-#   "model_type",          # 0 , a, ae, aeh, aeh+, & full
-#   "process_a",
-#   "process_b"
-# )
 #### Model identifiers
 variables_part_1 <- c(
   "model_number"       # u|b - uni|bi-variate; 0|1|2 - highest curve component
@@ -34,7 +25,6 @@ variables_part_1 <- c(
   ,"process_a"         # fev, pef, grip
   ,"process_b"         # block, digits_f
 )
-
 
 #### Model information
 variables_part_2 <- c(
@@ -213,6 +203,7 @@ variables_part_7 <- c(
   ,"process_b_domain"    # Domain os the process B (the long process)
 )
 # Now putting it all together
+#   component      list of column names                      label
 model_components <- list(
   "id"           = variables_part_1                        # Model identifiers            
   ,"info"        = variables_part_2                        # Model information            

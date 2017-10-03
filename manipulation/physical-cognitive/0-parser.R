@@ -1,4 +1,4 @@
-# the purpose of this script is to create a data transfer object (dto), which will hold all data and metadata from each candidate study of the exercise
+# the purpose of this script is to create a data catalog of all models extracted from Mplus outputs
 
 # run the line below to stitch a basic html output. For elaborated report, run the corresponding .Rmd file
 # knitr::stitch_rmd(script="./manipulation/0-ellis-island.R", output="./manipulation/stitched-output/0-ellis-island.md")
@@ -10,7 +10,7 @@ cat("\f") # clear console
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
 source("./scripts/mplus/group-variables.R")
 source("./scripts/mplus/extraction-functions-auto.R")
-# source("./scripts/common-functions.R")
+source("./scripts/common-functions.R")
 
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
@@ -22,6 +22,8 @@ requireNamespace("ggplot2") # graphing
 requireNamespace("tidyr")   # data wrangling
 requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("testit")  # asserting conditions meet expected patterns.
+requireNamespace("readr")   # input and output of data
+requireNamespace("knitr")   # input and output of data
 
 # ---- declare-globals ---------------------------------------------------
 path_folder <- "./model-output/physical-cognitive/studies/"

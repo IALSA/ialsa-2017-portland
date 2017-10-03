@@ -23,7 +23,7 @@ requireNamespace("tidyr")   # data wrangling
 requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("testit")  # asserting conditions meet expected patterns.
 requireNamespace("readr")   # input and output of data
-requireNamespace("knitr")   # input and output of data
+
 
 # ---- declare-globals ---------------------------------------------------------
 path_input   <- "./model-output/physical-cognitive/0-catalog-raw"
