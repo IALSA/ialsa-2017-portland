@@ -28,6 +28,7 @@ requireNamespace("readr")   # input and output of data
 # ---- declare-globals ---------------------------------------------------------
 path_input   <- "./model-output/physical-cognitive/2-catalog-wide"
 path_save  <- "./model-output/physical-cognitive/3-catalog-long"
+
 # the structure of coefficient suffixes
 regex_general <- "^(a|b|aa|bb|ab|er|cr)_(\\w+)_(\\d{2})_(est|se|wald|pval|ci95_lower|ci95_upper)$"
 

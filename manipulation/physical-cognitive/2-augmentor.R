@@ -76,21 +76,21 @@ testit::assert("The model number should match the univariate or bivariate patter
 catalog$outcome_count <- ifelse(is_univariate, 1L, 2L)
 
 # # create a small ds for testing and development
-# ds_small <- catalog %>%
-#   dplyr::filter(
-#     # study_name == "octo"
-#     # ,process_a  == "gait"
-#     # ,process_b  == "block"
-#     # ,subgroup   == "female"
-#     # ,model_type == "aehplus"
-#   ) %>%
-#   dplyr::select_(
-#     .dots=c(
-#        variables_part_1
-#       ,variables_part_2
-#       ,variables_part_6
-#     )
-#   )
+ds_small <- catalog %>%
+  dplyr::filter(
+    study_name == "octo"
+    ,process_a  == "gait"
+    # ,process_b  == "block"
+    ,subgroup   == "female"
+    ,model_type == "aehplus"
+  ) %>%
+  dplyr::select_(
+    .dots=c(
+       variables_part_1
+      ,variables_part_2
+      ,variables_part_6
+    )
+  )
  
 # ------ conduct-computation ----------------------
 # compute correlation coefficient from raw covariances using Fisher transform
