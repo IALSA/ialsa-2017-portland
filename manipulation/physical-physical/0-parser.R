@@ -1,4 +1,4 @@
-# the purpose of this script is to create a data transfer object (dto), which will hold all data and metadata from each candidate study of the exercise
+# the purpose of this script is to create a data catalog of all models extracted from Mplus outputs
 
 # run the line below to stitch a basic html output. For elaborated report, run the corresponding .Rmd file
 # knitr::stitch_rmd(script="./manipulation/0-ellis-island.R", output="./manipulation/stitched-output/0-ellis-island.md")
