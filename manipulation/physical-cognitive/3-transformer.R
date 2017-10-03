@@ -10,6 +10,8 @@ cat("\f") # clear console
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
 source("./scripts/mplus/group-variables.R")
 source("./scripts/mplus/model-components.R")
+
+
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) #Pipes
@@ -20,9 +22,12 @@ requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conf
 requireNamespace("testit")  # asserting conditions meet expected patterns.
 requireNamespace("readr")   # input and output of data
 
+
+
+
 # ---- declare-globals ---------------------------------------------------------
-path_input   <- "./model-output/physical-physical/2-catalog-wide"
-path_save  <- "./model-output/physical-physical/3-catalog-long"
+path_input   <- "./model-output/physical-cognitive/2-catalog-wide"
+path_save  <- "./model-output/physical-cognitive/3-catalog-long"
 # the structure of coefficient suffixes
 regex_general <- "^(a|b|aa|bb|ab|er|cr)_(\\w+)_(\\d{2})_(est|se|wald|pval|ci95_lower|ci95_upper)$"
 
@@ -35,14 +40,15 @@ catalog_wide <- readr::read_csv(paste0(path_input,".csv"),col_names = TRUE)
 
 
 # domain_renaming_stencil <- readr::read_csv("./reports/correlation-3/pulmonary-domain-structure-dead.csv")
-# domain_renaming_stencil %>% dplyr::glimpse()
+domain_renaming_stencil <- readr::read_csv("./data/public/raw/pulmonary-domain-structure-dead.csv")
+domain_renaming_stencil %>% glimpse()
 # ---- tweak-data --------------------------------------------------------------
 # extract a single model for inspection and testing
 ds <- catalog_wide %>%
   dplyr::filter(
-    study_name == "octo"
+     study_name == "octo"
     ,process_a  == "grip"
-    ,process_b  == "gait"
+    # ,process_b  == "gait"
     ,subgroup   == "female"
     ,model_type == "aehplus"
   )
@@ -81,13 +87,13 @@ ds_long <- catalog_wide %>% # use when running
 ds_long %>% dplyr::glimpse()
 
 # impose specific domain structure
-# ds_long <- ds_long %>%
-#   dplyr::left_join(domain_renaming_stencil, by = c("study_name", "process_b","process_b_domain")) %>%
-#   dplyr::mutate(process_b_domain = domain_new) %>% # overwrite with new values
-#   dplyr::select(-domain_new)   # remove dublicated columns
+ds_long <- ds_long %>%
+  dplyr::left_join(domain_renaming_stencil, by = c("study_name", "process_b","process_b_domain")) %>%
+  dplyr::mutate(process_b_domain = process_b_domain_new) %>% # overwrite with new values
+  dplyr::select(-process_b_domain_new)   # remove dublicated columns
 ds_long %>% dplyr::glimpse()
 
-
+d <- ds_long %>% filter(is.na(process_b_label))
 
 
 

@@ -91,7 +91,7 @@ catalog$outcome_count <- ifelse(is_univariate, 1L, 2L)
 #       ,variables_part_6
 #     )
 #   )
-
+ 
 # ------ conduct-computation ----------------------
 # compute correlation coefficient from raw covariances using Fisher transform
 alpha <- 0.05

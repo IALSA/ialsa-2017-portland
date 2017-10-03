@@ -159,7 +159,7 @@ ds <- ds %>%
   dplyr::rename_("process_b_cell"   = "label_cell") %>% # value in the cell, name of the test
   dplyr::rename_("process_b_row"    = "label_row")  %>% # label of the row, main descriptive label identifying a measure
   dplyr::rename_("process_b_domain" = "domain")         # color of the cell
-
+ 
 # ---- test-process_b --------------------------------------
 # verify
 t <- table(ds$process_b,        ds$study_name, useNA = "always"); t[t==0]<-"."; t 
@@ -190,9 +190,22 @@ d %>% arrange_("process_b_domain") %>% kable()
 #   ) 
 
 # ---- standardize-names -------------------------
+ds %>% glimpse(70)
 catalog <- rename_columns_in_catalog(ds)
 catalog %>% glimpse(70)
-ds %>% glimpse(70)
+
+# ---- remove-unwanted-measures --------------------
+# to avoid removing case in each report, do it here
+# see https://github.com/IALSA/IALSA-2015-Portland/issues/152#issuecomment-268622007
+catalog <- catalog %>%
+  dplyr::filter(!(study_name == 'hrs' & process_b == "tics")) %>%
+  # correct the spellings of specific tests
+  dplyr::mutate(
+    # some of the measure require corrections at the study level
+    process_b = ifelse(study_name == "map"  & process_b == "matrices", "raven_standard", process_b),
+    process_b = ifelse(study_name == "lasa" & process_b == "raven",    "raven_color_ab", process_b)
+  ) #
+
 # ---- save-to-disk ------------------------------------------------------------
 write.csv(catalog,  paste0(path_save,".csv"), row.names=F)
 
