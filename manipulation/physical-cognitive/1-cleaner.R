@@ -10,48 +10,74 @@ cat("\f") # clear console
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
 source("./scripts/mplus/group-variables.R")
 source("./scripts/mplus/extraction-functions-auto.R")
-# source("./scripts/common-functions.R")
+source("./scripts/common-functions.R")
 
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) #Pipes
+library(knitr)
+library(dplyr)
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 requireNamespace("ggplot2") # graphing
 requireNamespace("tidyr")   # data wrangling
 requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("testit")  # asserting conditions meet expected patterns.
 requireNamespace("readr")   # input and output of data
+requireNamespace("knitr")   # input and output of data
 
-# ---- declare_globals ---------------------------------------------------------
-path_input   <- "./model-output/physical-physical/0-catalog-raw"
-path_save  <- "./model-output/physical-physical/1-catalog-clean"
+# ---- declare-globals ---------------------------------------------------------
+path_input   <- "./model-output/physical-cognitive/0-catalog-raw"
+path_save  <- "./model-output/physical-cognitive/1-catalog-clean"
 
-# ---- load_data ---------------------------------------------------------------
+# ---- utility-functions -------------------------------------------------------
+# functions local to this script go here. 
+
+# repeat the definition here so that you can replace default to html=F
+# adds neat styling to your knitr table
+neat <- function(x, html = F , ...){
+  # browser()
+  # knitr.table.format = output_format
+  if(!html){
+    x_t <- knitr::kable(x, format = "pandoc", row.names = F,...)
+  }else{
+    x_t <- x %>%
+      # x %>%
+      # knitr::kable() %>%
+      knitr::kable(format="html",row.names = F, ...) %>%
+      kableExtra::kable_styling(
+        bootstrap_options = c("striped", "hover", "condensed","responsive"),
+        # bootstrap_options = c( "condensed"),
+        full_width = F,
+        position = "left"
+      )
+  }
+  return(x_t)
+}# usage:
+# nt <- t %>% neat()
+
+# ---- load-data ---------------------------------------------------------------
 # catalog <- read.csv(paste0(path_input,".csv"), header = T,  stringsAsFactors=FALSE)
 catalog <- readr::read_csv(paste0(path_input,".csv"),col_names = TRUE)
 
-# ---- tweak_data --------------------------------------------------------------
+# ---- tweak-data --------------------------------------------------------------
 colnames(catalog)
 ds <- catalog %>% dplyr::arrange_("model_type", "process_a") %>%
   dplyr::select_("study_name", "model_number","subgroup","model_type","process_a", "process_b")
-
-# assing alias
+# assign an alias for quick reference in this script
 ds <- catalog
-
 # ----- load-rename-classify-mapping -------------------------------------
 ds_rules <- read.csv("./data/public/raw/rename-classify-rules.csv", stringsAsFactors = F) %>%
   dplyr::select(-notes,-mplus_name)
 
-# ---- spell-model_number ------------------------------------------------------
+
+# ---- spell_model_number ------------------------------------------------------
 t <- table(ds$model_number, ds$study_name);t[t==0]<-".";t
 
 # ---- spell-subgroup ---------------------------------------------------------
 t <- table(ds$subgroup, ds$study_name);t[t==0]<-".";t
 
 # ---- spell-model_type -------------------------------------------
-t <- table(ds$model_type, ds$study_name);t[t==0]<-".";t
-
-
+t <- table(ds$model_type, ds$study_name);t[t==0]<-".";t # old values
 # ---- correct-model_type ------------------------------------------------------
 # extract the specific renaming rule
 d_rule <- ds_rules %>%
@@ -62,19 +88,17 @@ d_rule
 ds <- ds %>%
   dplyr::left_join(d_rule, by=c("model_type"="entry_raw"))
 # verify
-t <- table(ds$entry_new, ds$study_name);t[t==0]<-".";t
+t <- table(ds$entry_new, ds$study_name);t[t==0]<-".";t # what the new values would look like
 t <- table(ds$model_type, ds$entry_new);t[t==0]<-".";t # raw rows, new columns
-# head(ds)
+# the table above shows how raw (old) values will be transformed into new
 # Replace raw entries with new entries
 ds <- ds %>%
   dplyr::mutate_("model_type"="entry_new") %>%
   dplyr::select(-entry_new)
 t <- table(ds$model_type, ds$study_name); t[t==0]<-"."; t
 
-
 # ---- spell-process_a -------------------------------------------------
 t <- table(ds$process_a, ds$study_name); t[t==0]<-"."; t
-
 # ---- correct-process_a ------------------------------------------------
 # extract the specific renaming rule
 d_rule <- ds_rules %>%
@@ -83,66 +107,92 @@ d_rule <- ds_rules %>%
 d_rule
 # join the model data frame to the conversion data frame.
 ds <- ds %>%
-  dplyr::left_join(d_rule, by=c("process_a"="entry_raw"))
+  dplyr::left_join(d_rule, by=c("process_a"="entry_raw")) #%>% 
+  # as.data.frame()
+# ---- test-process_a ------------------------------------------------
 # verify
 t <- table(ds$entry_new, ds$study_name);t[t==0]<-".";t
-head(ds)
-t <- table(ds[ ,"entry_new"],  ds[,"study_name"]);t[t==0]<-".";t
 # Remove the old variable, and rename the cleaned/condensed variable.
 ds <- ds %>%
-  dplyr::select(-process_a) %>%
+  dplyr::select(-process_a) %>% #dplyr::filter(model_number == "b1") %>%
   dplyr::rename_("process_a"="entry_new") # name correction
 # verify
 t <- table(ds$process_a, ds$study_name); t[t==0]<-"."; t
-
 
 # ---- spell-process_b -------------------------------------------------
 t <- table(ds$process_b, ds$study_name); t[t==0]<-"."; t
 d <- ds %>%
   dplyr::group_by_("study_name","process_b") %>%
   dplyr::summarize(count=n()) %>%
-  dplyr::ungroup() %>%
-  dplyr::arrange_("study_name")
-knitr::kable(d)
-
+  dplyr::ungroup() #%>%
+  # dplyr::arrange_("study_name")
+# d %>% neat(html=F,align = c("r","r","r"))
+knitr::kable(d %>% dplyr::arrange_("study_name"))
+knitr::kable(d %>% dplyr::arrange_("process_b"))
 # ---- correct-process_b ------------------------------------------------
 # extract the specific renaming rule
 d_rule <- ds_rules %>%
-  dplyr::filter(category == "physical") %>%
+  dplyr::filter(category == "cognitive") %>%
   dplyr::select(entry_raw,entry_new,label_cell,label_row, domain )
-d_rule
+d_rule # see greater context in  ./data/public/raw/rename-classify-rules.csv
 # join the model data frame to the conversion data frame.
 ds <- ds %>%
   dplyr::left_join(d_rule, by=c("process_b"="entry_raw"))
 # verify
-t <- table(ds$entry_new, ds$study_name);t[t==0]<-".";t
-head(ds)
-t <- table(ds[ ,"entry_new"], ds[,"study_name"]);t[t==0]<-".";t
-t <- table(ds[ ,"label_cell"],  ds[,"study_name"]);t[t==0]<-".";t
-t <- table(ds[ ,"label_row"],  ds[,"study_name"]);t[t==0]<-".";t
-t <- table(ds[ ,"domain"],     ds[,"study_name"]);t[t==0]<-".";t
+t <- table(ds$entry_new,  ds$study_name);t[t==0]<-".";t
+t <- table(ds$label_cell, ds$study_name);t[t==0]<-".";t
+t <- table(ds$label_row,  ds$study_name);t[t==0]<-".";t
+t <- table(ds$domain,     ds$study_name);t[t==0]<-".";t
+# count models for the combination of each:
+d <- ds %>%
+  dplyr::group_by_("study_name","process_b") %>%
+  dplyr::summarize(count=n()) %>%
+  dplyr::ungroup() 
+# arrange differently for inspection
+d %>% arrange_("study_name") %>% kable()
+d %>% arrange_("process_b") %>% kable()
+
 # Remove the old variable, and rename the cleaned/condensed variable.
 ds <- ds %>%
-  dplyr::select(-process_b) %>%
-  dplyr::rename_("process_b"="entry_new") %>% # name correction
-  dplyr::rename_("process_b_cell"="label_cell") %>%
-  dplyr::rename_("process_b_row"="label_row") %>%
-  dplyr::rename_("process_b_domain"="domain")
+  dplyr::select(-process_b) %>% # contains the raw values that we recoded
+  dplyr::rename_("process_b"        = "entry_new")  %>% # replace with new
+  dplyr::rename_("process_b_cell"   = "label_cell") %>% # value in the cell, name of the test
+  dplyr::rename_("process_b_row"    = "label_row")  %>% # label of the row, main descriptive label identifying a measure
+  dplyr::rename_("process_b_domain" = "domain")         # color of the cell
+
+# ---- test-process_b --------------------------------------
 # verify
-t <- table(ds$process_b_row, ds$study_name); t[t==0]<-"."; t
-
-# ---- test_process_b ---------------------------------------
-t <- table(ds$process_b, ds$study_name);t[t==0]<-".";t
-d <- ds %>% dplyr::group_by_("process_b","study_name") %>% dplyr::summarize(count=n())
-d <- d %>% dplyr::ungroup() %>% dplyr::arrange_("study_name")
-knitr::kable(d)
-
-# ---- test-process_b_domain -----------------------------------------
-t <- table(ds$process_b, ds$process_b_domain);t[t==0]<-".";t
+t <- table(ds$process_b,        ds$study_name, useNA = "always"); t[t==0]<-"."; t 
+t <- table(ds$process_b_cell,   ds$study_name, useNA = "always"); t[t==0]<-"."; t
+t <- table(ds$process_b_row,    ds$study_name, useNA = "always"); t[t==0]<-"."; t
+t <- table(ds$process_b_domain, ds$study_name, useNA = "always"); t[t==0]<-"."; t
+# count models for the combination of each:
+d <- ds %>%
+  dplyr::group_by_(
+     "study_name"
+    ,"process_b"
+    ,"process_b_cell"
+    ,"process_b_row"
+    ,"process_b_domain"
+  ) %>%
+  dplyr::summarize(count=n()) %>%
+  dplyr::ungroup() 
+# final inspection
+d %>% arrange_("study_name") %>% kable()
+d %>% arrange_("process_b") %>% kable()
+d %>% arrange_("process_b_cell") %>% kable()
+d %>% arrange_("process_b_row") %>% kable()
+d %>% arrange_("process_b_domain") %>% kable()
+# to pick up where and how the columns differ, explore the code below
+#d %>% 
+#   dplyr::mutate(
+#     test_same = ifelse(process_b==process_b_cell,T,F)
+#   ) 
 
 # ---- standardize-names -------------------------
 catalog <- rename_columns_in_catalog(ds)
-
+catalog %>% glimpse(70)
+ds %>% glimpse(70)
 # ---- save-to-disk ------------------------------------------------------------
 write.csv(catalog,  paste0(path_save,".csv"), row.names=F)
 
