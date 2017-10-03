@@ -10,6 +10,8 @@ cat("\f") # clear console
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
 source("./scripts/mplus/group-variables.R")
 source("./scripts/mplus/model-components.R")
+
+
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) #Pipes
@@ -19,13 +21,16 @@ requireNamespace("tidyr")   # data wrangling
 requireNamespace("dplyr")   # avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("testit")  # asserting conditions meet expected patterns.
 requireNamespace("readr")   # input and output of data
+requireNamespace("knitr")   # input and output of data
+
+
 
 # ---- declare-globals ---------------------------------------------------------
-path_input   <- "./model-output/physical-physical/1-catalog-clean"
-path_save  <- "./model-output/physical-physical/2-catalog-wide"
+path_input   <- "./model-output/physical-cognitive/1-catalog-clean"
+path_save  <- "./model-output/physical-cognitive/2-catalog-wide"
 
 # Get names of groups from "./scripts/mplus/model-components.R"
-# list them here for demonstration, but refer to master copy for authority
+# list them here for demonstration, but refer to master copy for authority (READ THIS NOTE)
 # PART 1 : model identifiers
 variables_part_1 <- c(
   "model_number"
@@ -61,9 +66,8 @@ variables_part_6 <- c(
 )
 
 # ---- load-data ---------------------------------------------------------------
-# catalog <- read.csv(path_input, header = T,  stringsAsFactors=FALSE)
 catalog <- readr::read_csv(paste0(path_input,".csv"),col_names = TRUE)
-
+catalog %>% glimpse(70)
 # rm(path_input)
 # ----- bivariate_test -----_________________________________________________
 is_univariate <- grepl(pattern="^u\\d$", x=catalog$model_number)
@@ -71,33 +75,32 @@ is_bivariate <- grepl(pattern="^b\\d$", x=catalog$model_number)
 testit::assert("The model number should match the univariate or bivariate pattern.", is_univariate | is_bivariate)
 catalog$outcome_count <- ifelse(is_univariate, 1L, 2L)
 
-# create a small ds for testing and development
-ds_small <- catalog %>%
-  dplyr::filter(
-    # study_name == "octo"
-    # ,process_a  == "gait"
-    # ,process_b  == "block"
-    # ,subgroup   == "female"
-    # ,model_type == "aehplus"
-  ) %>%
-  dplyr::select_(
-    .dots=c(
-       variables_part_1
-      ,variables_part_2
-      ,variables_part_6
-    )
-  )
+# # create a small ds for testing and development
+# ds_small <- catalog %>%
+#   dplyr::filter(
+#     # study_name == "octo"
+#     # ,process_a  == "gait"
+#     # ,process_b  == "block"
+#     # ,subgroup   == "female"
+#     # ,model_type == "aehplus"
+#   ) %>%
+#   dplyr::select_(
+#     .dots=c(
+#        variables_part_1
+#       ,variables_part_2
+#       ,variables_part_6
+#     )
+#   )
 
 # ------ conduct-computation ----------------------
 # compute correlation coefficient from raw covariances using Fisher transform
 alpha <- 0.05
 z_alpha <- qnorm(1 - (alpha/2))
-
 # ds <- ds_small %>%  # use for testing
 ds <- catalog %>%   # use for full implementation
   dplyr::mutate(
     
-    cr_levels_est       = ab_tau_00_est  / ( sqrt(aa_tau_00_est) * sqrt(bb_tau_00_est) )
+     cr_levels_est      = ab_tau_00_est  / ( sqrt(aa_tau_00_est) * sqrt(bb_tau_00_est) )
     ,cr_levels_z        = atanh(cr_levels_est)
     ,cr_levels_ztest    = cr_levels_z * sqrt(subject_count - 3)
     ,cr_levels_zpval    = pnorm(-abs(cr_levels_z))*2
