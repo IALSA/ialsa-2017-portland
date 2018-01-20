@@ -68,7 +68,10 @@ get_msum <- function(
   msum
 
   # get a single model summary
-  ith_msum <- MplusAutomation::extractModelSummaries(target=path)
+  # ith_msum <- MplusAutomation::extractModelSummaries(target=path)
+  ith_msum <- MplusAutomation::readModels(target=path)$summaries
+  
+  
   # ith_msum %>% t()
   # LOGICAL: is this descriptor present in the current model?
   (descriptor_exists <- names(ith_msum) %in% msum_names)
@@ -99,7 +102,9 @@ get_mpar <- function(
           message("One or more variables have a variance of zero")
           mpar <- "One or more variables have a variance of zero"
         }else{
-           mpar <- MplusAutomation::extractModelParameters(target=path, dropDimensions=T)
+           # mpar <- MplusAutomation::extractModelParameters(target=path, dropDimensions=T)
+           mpar <- MplusAutomation::readModels(target=path)
+           mpar <- mpar$parameters
         }
     }
 
@@ -119,6 +124,7 @@ get_results_basic <- function(
   mpar,
   result
 ){
+  # browser()
   mplus_output <- scan(path, what='character', sep='\n') # each line of output as a char value
   # if(!mpar=="One or more variables have a variance of zero"){
   if(!is.na(mpar)){
@@ -624,9 +630,12 @@ collect_result <- function(
 
   result <- get_results_basic(path, mid, msum, mpar, result)
   result <- get_results_errors(path, mpar, result)
-  result <- get_results_random(path, mpar, result)
-  result <- get_results_residual(path, mpar, result)
-  result <- get_results_fixed(path, mpar, result)
+  t(result)
+  if(result$has_converged){
+    result <- get_results_random(path, mpar, result)
+    result <- get_results_residual(path, mpar, result)
+    result <- get_results_fixed(path, mpar, result)
+  }
 
   # results <- rename_columns_in_catalog(result)
   return(result)
