@@ -2,7 +2,7 @@ This folder contains scripts for carrying out model estimation using functions p
 
 
 # Map of Mechanized Estimation
-<img src="../../libs/images/work-flow-diagram-auto-estimation.jpg" width="300px" />
+<img src="../../libs/images/work-flow-diagram-auto-estimation.jpg" width="600px" />
 
 [IalsaSynthesis]:https://github.com/IALSA/IalsaSynthesis/blob/master/README.md
 [ialsa-study-curator]:https://github.com/IALSA/ialsa-study-curator/blob/master/README.md
