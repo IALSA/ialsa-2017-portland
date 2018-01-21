@@ -20,10 +20,10 @@ mplus_generator_bivariate <- function(
   # model_type         = "aehplus"
   # process_a     = 'fev'# item name of process (A), goes into file name
   # process_b     = 'numbercomparison'# item name of process (B), goes into file name
-
-    # wave_set_modeled   =  c(1,2,3,4,5, 6,7, 8, 9, 11)
+# 
+    wave_set_modeled   =  c(1,2,3,4,5, 6,7)
   # subset_condition_1 = "dementia_ever NE 1" # subset data to member of this group
-  # folder_data        = "./data/unshared/derived/map-1"
+  # folder_data        = "./data/unshared/derived/lasa-1"
   # path_prototype     = "./sandbox/pipeline-demo-1/prototype-wide.inp"
   # folder_output      = "./sandbox/pipeline-demo-1/outputs/"
   # run_models         = FALSE # If TRUE then Mplus runs estimation to produce .out, .gh5, and/or, other files
@@ -171,8 +171,10 @@ mplus_generator_bivariate <- function(
     saved_location_mplus <- paste0(pathRoot,"/",sub_directory)
     saved_location_mplus <- gsub("/./","/",saved_location_mplus)
     MplusAutomation::runModels(
-      directory=saved_location_mplus,
-      filefilter = paste0(model_id,".inp")
+      target = saved_location_mplus 
+      # directory=saved_location_mplus,
+      # directory=saved_location_mplus,
+      ,filefilter = paste0(model_id,".inp")
       )#, Mplus_command = Mplus_install_path)
   }
   file.remove(path_local_data)
