@@ -5,18 +5,18 @@ cat("\f") # cleans console
 
 # ---- load-sources ------------------------------------------------------------
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
-base::source("./scripts/functions-common.R")
+base::source("./scripts/common-functions.R")
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) #Pipes
-library(tidyverse)
+# library(tidyverse)
 # library(TabularManifest)
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 requireNamespace("ggplot2")
 requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("testit")
-requireNamespace("reshape2") # data transformations
+# requireNamespace("reshape2") # data transformations
 
 # ---- declare-globals ---------------------------------------------------------
 # path_input  <- "./data/unshared/raw/map/ds0.rds"
@@ -44,6 +44,17 @@ names(dto[["metaData"]])
 
 # each element of the unitData list is a dataset with specific measures
 head(dto$unitData$recall)
+
+# ---- tweek-data ---------------------------------
+# TODO: implement these changes in the appropriate place in the ialsa-study-curator
+str(dto$unitData$sex)
+ls <- dto$unitData
+for(i in names(ls)){
+  ls[[i]]$id <- as.integer(ls[[i]]$id)
+}
+str(ls$age)
+dto$unitData <- ls
+rm(ls)
 
 # ---- define-utility-functions -------------------
 # view a termporal pattern for one person
@@ -153,7 +164,7 @@ ls_data <- list()
 # ---- sex -----------------------
 ds <- dto$unitData$sex # select a single dataframe from the list object
 head(ds);lapply(ds,summary) # inspect it
-ds %>% group_by_("male") %>% tally() # tally
+ds %>% dplyr::group_by_("male") %>% dplyr::tally() # tally
 ls_data[["sex"]] <- dto$unitData$sex
 
 # ---- age ------------------------
@@ -171,7 +182,8 @@ ls_data[["age"]] <- ds
 # ---- edu ------------------------
 ds <- dto$unitData$edu
 head(ds);lapply(ds,summary)
-ds %>% group_by_("edu") %>% tally()
+table(ds$edu, useNA = "always")
+ds %>% dplyr::group_by_("edu") %>% dplyr::tally()
 ls_data[["edu"]] <- dto$unitData$edu
 
 # ---- height --------------------
@@ -186,31 +198,31 @@ ls_data[["height"]] <- dto$unitData$height
 # http://www.lasa-vu.nl/themes/physical/rookgedrag.html
 ds <- dto$unitData$smoking
 head(ds);lapply(ds,summary)
-str(ds)
-table(ds$smoked_ever)
-ds %>% group_by(smoked_ever) %>% tally()
+ds %>% dplyr::group_by(smoked_ever) %>% dplyr::tally()
 ds <- ds %>%
   dplyr::mutate(
     smoke_hist  = ifelse(smoked_ever=="No",0,
-                  ifelse(smoked_ever %in% c("No answer, asked","No valid data"),NA,1))
+                  ifelse(smoked_ever %in% c("No answer, asked","No valid data"),NA,1)) 
+    # smoke_hist <- as.logical(smoke_hist)
   )
 table(ds$smoke_hist, useNA = "always")
-ds %>% temporal_pattern("smoke_hist")
+ds %>% dplyr::group_by(smoke_hist) %>% dplyr::tally()
+# ds %>% temporal_pattern("smoke_hist")
 ls_data[["smoking"]] <- ds
 
 # ---- cardio --------------------
 # http://www.lasa-vu.nl/themes/physical/Cardiovascular_Diseases.htm
 ds <- dto$unitData$cardio
-head(ds);lapply(ds,table)
-table(ds$cvd)
-ds %>% group_by(cvd) %>% tally()
+head(ds);
+ds %>% dplyr::group_by(cvd) %>% dplyr::tally()
 ds <- ds %>%
   dplyr::mutate(
     cardio_hist = ifelse(cvd %in% c("definite cardio vascular disease",
                                "possible cardiovascular disease"), 1,
              ifelse(cvd == "no cardio vascular disease",0,NA))
   )
-table(ds$cardio, useNA = "always")
+table(ds$cardio_hist, useNA = "always")
+ds %>% dplyr::group_by(cardio_hist) %>% dplyr::tally()
 ls_data[["cardio"]] <- ds
 
 # ---- diabetes ------------------
@@ -218,22 +230,22 @@ ls_data[["cardio"]] <- ds
 ds <- dto$unitData$diabetes
 head(ds)
 table(ds$diabetes)
-ds %>% group_by(diabetes) %>% tally()
+ds %>% dplyr::group_by(diabetes) %>% dplyr::tally()
 ds <- ds %>%
   dplyr::mutate(
     diabetes_hist = ifelse(diabetes %in% c("definite diabetes","possible diabetes"),1,
                     ifelse(diabetes %in% c("no diabetes"),0,NA))
   )
-table(ds$diabetes_hist)
+table(ds$diabetes_hist, useNA = "always")
 ls_data[["diabetes"]] <- ds
 
 # ---- dementia -----------------
 ds <- dto$unitData$dementia
 head(ds)
-table(ds$dementia)
-ds %>% group_by(dementia,wave) %>% tally()
-ds %>% group_by(dementia) %>% tally()
-table(ds$dementia, ds$wave)
+table(ds$dementia, useNA = "always")
+ds %>% dplyr::group_by(dementia,wave) %>% dplyr::tally() %>% print(n = nrow(.))
+ds %>% dplyr::group_by(dementia) %>% dplyr::tally()
+table(ds$dementia, ds$wave, useNA = "always")
 ds <- ds %>%
   dplyr::mutate(
     demented = ifelse(dementia %in% paste0("dementia at ",c("C","D","E","F")),1,
@@ -258,6 +270,9 @@ lapply(dto, names)
 ds <- dto$unitData$grip
 head(ds)
 lapply(ds,summary)
+
+ds %>% over_waves("grip_left_1")
+ds %>% over_waves("grip_left_1")
 
 ds <- ds %>%
   dplyr::mutate(
@@ -445,7 +460,7 @@ ds <- ds %>%
 ds %>% dplyr::distinct(id) %>% dplyr::count()
 # no removals are done
 
-# ---- tweak-data -------------------
+# ---- tweak-merged-data- -------------------
 ds <- ds %>%
   dplyr::mutate(
     years_since_bl = as.double((age_at_visit - age_at_bl))
@@ -556,15 +571,25 @@ ds_long %>% over_waves("grip_max")
 
 ds_long %>%
   # filter(!dementia_ever==1) %>%
-  filter(male==TRUE) %>%
+  dplyr::filter(male==TRUE) %>%
   over_waves("pef_max")
 
 # ---- save-r-data -------------------
 # tranformed data with supplementary variables
-saveRDS(ds,paste0(generic_path,"data-long-plus.rds"))
+saveRDS(ds,paste0(generic_path,"/data-long-plus.rds"))
 # only variables used in analysis
-saveRDS(ds_long,paste0(generic_path,"data-long.rds"))
-saveRDS(ds_wide,paste0(generic_path,"data-wide.rds"))
+saveRDS(ds_long,paste0(generic_path,"/data-long.rds"))
+saveRDS(ds_wide,paste0(generic_path,"/data-wide.rds"))
 # prepared for Mplus
 write.table(ds_mplus, paste0(generic_path,"/wide-dataset.dat"), row.names=F, col.names=F)
 write(names(ds_mplus), paste0(generic_path,"/wide-variable-names.txt"), sep=" ")
+
+
+
+
+
+
+
+head(ds_long)
+d <- ds_long %>% 
+  dplyr::select(id, wave, )

@@ -26,7 +26,7 @@ requireNamespace("readr")   # input and output of data
 requireNamespace("knitr")   # input and output of data
 
 # ---- declare-globals ---------------------------------------------------
-path_folder <- "./model-output/physical-cognitive/studies/"
+path_folder <- "./model-output/physical-cognitive/studies/" # old scripts rely on "studies" to detect position in file address
 path_save <- "./model-output/physical-cognitive/0-catalog-raw"
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
@@ -75,22 +75,33 @@ collect_one_study <- function(
 #   ,save_folder  = path_folder                     
 # )
 path <- "./model-output/physical-cognitive/studies//lasa/grip_max-coding_max/b1_female_a_grip_max_coding_max.out"
-path <- list_path_out[["lasa"]][1]
-path <- list_path_out[["nuage"]][1]
-path <- list_path_out[["octo"]][1]
+# path <- "./model-output/physical-cognitive/studies//lasa/pef_max-coding_max/b1_male_a_pef_max_coding_max.out"
 a <- collect_result(path)
+scan(path, what='character', sep='\n') # each line of output as a char value
+
+
+# path <- "./model-output/physical-cognitive/studies//map/fev-bnt/b1_male_a_fev_bnt.out"
+# path <- "./model-output/physical-cognitive/studies//map/fev100-wordlistim/b1_female_a_fev100_wordlistim.out"
+# path <- list_path_out[["lasa"]][1]
+# path <- list_path_out[["nuage"]][1]
+# path <- list_path_out[["octo"]][1]
+
+
+
 # ---- load-data ---------------------------------------------------------------
 # create a list object broken by study, containing paths to model outputs
 list_path_out <-list(
+  # manual estimation (outputs provided "as is" from the study drivers)
    "eas"   = list.files(file.path(path_folder,"eas")  ,full.names=T, recursive=T, pattern="out$")
   ,"elsa"  = list.files(file.path(path_folder,"elsa") ,full.names=T, recursive=T, pattern="out$")
   ,"hrs"   = list.files(file.path(path_folder,"hrs")  ,full.names=T, recursive=T, pattern="out$")
   ,"ilse"  = list.files(file.path(path_folder,"ilse") ,full.names=T, recursive=T, pattern="out$")
-  ,"lasa"  = list.files(file.path(path_folder,"lasa") ,full.names=T, recursive=T, pattern="out$")
-  ,"map"   = list.files(file.path(path_folder,"map")  ,full.names=T, recursive=T, pattern="out$")
   ,"nuage" = list.files(file.path(path_folder,"nuage"),full.names=T, recursive=T, pattern="out$")
-  ,"octo"  = list.files(file.path(path_folder,"octo") ,full.names=T, recursive=T, pattern="out$")
   ,"satsa" = list.files(file.path(path_folder,"satsa"),full.names=T, recursive=T, pattern="out$")
+  # script estimation (outputs generated using IalsaSynthesis package, using datasets provided by IALSA Study Curator) 
+  ,"lasa"  = list.files(file.path(path_folder,"lasa") ,full.names=T, recursive=T, pattern="out$") # Cambridge version
+  ,"map"   = list.files(file.path(path_folder,"map")  ,full.names=T, recursive=T, pattern="out$")
+  ,"octo"  = list.files(file.path(path_folder,"octo") ,full.names=T, recursive=T, pattern="out$")
 )
 
 # ---- inspect-data ------------------------------------------------
@@ -118,15 +129,18 @@ path <- list_path_out[["nuage"]][1]
 
 # ---- parse-model-outputs --------------------------------------------
 # do not combine into a loop for convenient, disjoint usage
+# manual estimation (outputs provided "as is" from the study drivers)
 collect_one_study(list_path_out,"eas",   selected_results, path_folder)
 collect_one_study(list_path_out,"elsa",  selected_results, path_folder)
 collect_one_study(list_path_out,"hrs",   selected_results, path_folder)
 collect_one_study(list_path_out,"ilse",  selected_results, path_folder)
-# collect_one_study(list_path_out,"lasa",  selected_results, path_folder)
-# collect_one_study(list_path_out,"map",   selected_results, path_folder)
 collect_one_study(list_path_out,"nuage", selected_results, path_folder)
-collect_one_study(list_path_out,"octo",  selected_results, path_folder)
 collect_one_study(list_path_out,"satsa", selected_results, path_folder)
+
+# script estimation (outputs generated using IalsaSynthesis package, using datasets provided by IALSA Study Curator) 
+# collect_one_study(list_path_out,"lasa",  selected_results, path_folder)
+collect_one_study(list_path_out,"map",   selected_results, path_folder)
+collect_one_study(list_path_out,"octo",  selected_results, path_folder)
 
 # ---- assemble-catalog ---------------------------------------------------------
 # create a path to the folder one step above from the study specific within project
