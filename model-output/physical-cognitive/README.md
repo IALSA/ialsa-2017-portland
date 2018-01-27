@@ -19,7 +19,7 @@ While all models are estimated in Mplus, some of them used the help of R wrapper
 |   |NuAge   |
 |   |SATSA   |
 |  |  |
-|_Mechanized estimation_ ![][workflow-estimation] | _Catalog assembly_  ![][workflow-catalog]  |
+|_Mechanized estimation_ ![][workflow-estimation] |_Catalog assembly_  ![][workflow-catalog]  |
 
 
 
