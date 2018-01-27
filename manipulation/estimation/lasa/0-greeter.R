@@ -503,6 +503,7 @@ ds %>%
   dplyr::arrange(desc(unique)) # unique > 1 indicates change over wave
 
 # ---- center-covariates ---------------------------------
+# at this time we create the variables names that _should_ be consistent across studies (used in estimation)
 ds <- ds %>%
   dplyr::mutate(
     age_c70 = age_at_bl - 70,

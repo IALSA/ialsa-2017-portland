@@ -12,7 +12,7 @@ source("./scripts/mplus/functions-to-generate-Mplus-scripts.R")
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr) # enables piping : %>%
-library(tidyverse)
+# library(tidyverse)
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 requireNamespace("ggplot2") # graphing
 requireNamespace("tidyr") # data manipulation
@@ -102,14 +102,15 @@ ls_model_type <- list(
 ############################################################ GRIP #####
 ## @knitr dummy_1
 # Use the first example as the template for further pairs
-
-wave_set_modeled <-  c(1,2,3,4)
+ds_long %>% glimpse(90)
+wave_set_modeled <-  c(2,3,4,5,6)
 subset_condition_1 <- "dementia_ever NE 1"
 folder_data        = "./data/unshared/derived/lasa-1"
 path_prototype     = "./manipulation/estimation/prototype-wide.inp"
-folder_output      = "./output/studies/lasa/phys-cog/"
+folder_output      = "./model-output/physical-cognitive/studies/lasa/"
 # folder_data        = "./data/unshared/derived/map"
-# folder_output      = "./output/studies/map/phys-cog/pulmonary"
+# folder_output      = "./output/physical-cognitive/studies/map/phys-cog/pulmonary"
+# list.files("model-output/physical-cognitive/studies/lasa/grip_max-coding_max/")
 
 # single model
 # mplus_generator_bivariate(
@@ -127,9 +128,9 @@ folder_output      = "./output/studies/lasa/phys-cog/"
 # )
 
 # loop over conditions
-for(phys_measure in "pef_max"){
+for(phys_measure in "grip_max"){
 # for(phys_measure in varnames_physical){
-  for(cog_measure in "mmse"){
+  for(cog_measure in "coding_max"){
   # for(cog_measure in varnames_cognitive){
     for(subgroup in names(ls_subgroup)){
       for(model_type in names(ls_model_type)){
