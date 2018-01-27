@@ -17,6 +17,7 @@ model-output/*/*/*/*.*
 model-output/*/*/*/*/*.*
 model-output/*/*/*/*/*/*.*
 model-output/*/*/*/*/*/*/*.*
+!model-output/README.md
 
 ## Exceptions
 !data/unshared/README.md
