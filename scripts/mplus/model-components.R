@@ -55,14 +55,14 @@ stats_possible        <- c("est", "se", "wald", "pval")#, "ci95_lower", "ci95_up
 # combine the two into a data frame
 ds_order_gamma <- tidyr::crossing(
   process       = c("a", "b"),
-  ceofficient   = factor(coefficients_possible, levels=coefficients_possible),
+  coefficient   = factor(coefficients_possible, levels=coefficients_possible),
   stat          = factor(stats_possible       , levels=stats_possible)
 )
 # assembled the population of the fixed effects loadings
 variables_part_3 <- sprintf(
   "%s_gamma_%s_%s",
   ds_order_gamma$process,
-  ds_order_gamma$ceofficient,
+  ds_order_gamma$coefficient,
   ds_order_gamma$stat
 )
 ##### The order in which predictors enter the equation

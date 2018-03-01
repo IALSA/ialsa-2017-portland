@@ -93,3 +93,54 @@ basic_line <- function(
 
 # g <- basic_line(d, "cogn_global", "fu_year", "salmon", .9, .1, T)
 # g
+
+# view a termporal pattern for one person
+temporal_pattern <- function(
+  d, 
+  measure, 
+  seed_value = 42
+){
+  if(!seed_value=="random"){
+    set.seed(seed_value)
+  }else{
+    set.seed(NULL)
+  }
+  (ids <- sample(unique(d$id),1))
+  d %>%
+    dplyr::filter(id %in% ids ) %>%
+    dplyr::select_("id","wave", measure)
+  # print(d)
+}
+
+# examine the descriptives over waves
+over_waves <- function(
+  ds, 
+  measure_name,
+  print_table=T, 
+  exclude_values=""
+) {
+  ds <- as.data.frame(ds)
+  testit::assert("No such measure in the dataset", measure_name %in% unique(names(ds)))
+  # measure_name = "htval"; wave_name = "wave"; exclude_values = c(-99999, -1)
+  cat("Measure : ", measure_name,"\n", sep="")
+  t <- table( ds[,measure_name], ds[,"wave"], useNA = "always"); t[t==0] <- "."
+  if(print_table==T){
+    print(t)
+  }
+  cat("\n")
+  ds[,measure_name] <- as.numeric(ds[,measure_name])
+  
+  d <- ds[!(ds[,measure_name] %in% exclude_values), ]
+  a <- lazyeval::interp(~ round(mean(var),2) , var = as.name(measure_name))
+  b <- lazyeval::interp(~ round(sd(var),3),   var = as.name(measure_name))
+  c <- lazyeval::interp(~ n())
+  dots <- list(a,b,c)
+  t <- d %>%
+    dplyr::select_("id","wave", measure_name) %>%
+    na.omit() %>%
+    # dplyr::mutate_(measure_name = as.numeric(measure_name)) %>%
+    dplyr::group_by_("wave") %>%
+    dplyr::summarize_(.dots = setNames(dots, c("mean","sd","count")))
+  return(as.data.frame(t))
+  
+}

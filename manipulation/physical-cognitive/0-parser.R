@@ -1,7 +1,7 @@
 # the purpose of this script is to create a data catalog of all models extracted from Mplus outputs
 
-# run the line below to stitch a basic html output. For elaborated report, run the corresponding .Rmd file
-# knitr::stitch_rmd(script="./manipulation/0-ellis-island.R", output="./manipulation/stitched-output/0-ellis-island.md")
+# To stitch a basic html output from this code, run the line below. For elaborated report, run the corresponding .Rmd file
+# knitr::stitch_rmd(script="./manipulation/physical-cognitive/0-parser.R", output="./manipulation/physical-cognitive/stitched-output/0-parser.md")
 #These first few lines run only when the file is run in RStudio, !!NOT when an Rmd/Rnw file calls it!!
 rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 cat("\f") # clear console
@@ -27,7 +27,7 @@ requireNamespace("knitr")   # input and output of data
 
 # ---- declare-globals ---------------------------------------------------
 path_folder <- "./model-output/physical-cognitive/studies/" # old scripts rely on "studies" to detect position in file address
-path_save <- "./model-output/physical-cognitive/0-catalog-raw"
+path_save <- "./model-output/physical-cognitive/0-catalog-raw" # product of this script
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 requireNamespace("ggplot2")
@@ -74,10 +74,12 @@ collect_one_study <- function(
 #   ,column_names = selected_results                       
 #   ,save_folder  = path_folder                     
 # )
-path <- "./model-output/physical-cognitive/studies//lasa/grip_max-coding_max/b1_female_a_grip_max_coding_max.out"
-# path <- "./model-output/physical-cognitive/studies//lasa/pef_max-coding_max/b1_male_a_pef_max_coding_max.out"
+# path <- "./model-output/physical-cognitive/studies//lasa/grip_max-coding_max/b1_female_a_grip_max_coding_max.out"
+# path <- "./model-output/physical-cognitive/studies/eas/Gait/b1_female_ae_walking_executive_gait_trailsb.out"
+path <- "./model-output/physical-cognitive/studies/lasa/physical-cognitive/b1_female_aehplus_gait_codingtask.out"
+file.exists(path)
 a <- collect_result(path)
-scan(path, what='character', sep='\n') # each line of output as a char value
+# scan(path, what='character', sep='\n') # each line of output as a char value
 
 
 # path <- "./model-output/physical-cognitive/studies//map/fev-bnt/b1_male_a_fev_bnt.out"
@@ -92,28 +94,28 @@ scan(path, what='character', sep='\n') # each line of output as a char value
 # create a list object broken by study, containing paths to model outputs
 list_path_out <-list(
   # manual estimation (outputs provided "as is" from the study drivers)
-   "eas"   = list.files(file.path(path_folder,"eas")  ,full.names=T, recursive=T, pattern="out$")
-  ,"elsa"  = list.files(file.path(path_folder,"elsa") ,full.names=T, recursive=T, pattern="out$")
-  ,"hrs"   = list.files(file.path(path_folder,"hrs")  ,full.names=T, recursive=T, pattern="out$")
-  ,"ilse"  = list.files(file.path(path_folder,"ilse") ,full.names=T, recursive=T, pattern="out$")
-  ,"nuage" = list.files(file.path(path_folder,"nuage"),full.names=T, recursive=T, pattern="out$")
-  ,"satsa" = list.files(file.path(path_folder,"satsa"),full.names=T, recursive=T, pattern="out$")
+  #  "eas"   = list.files(file.path(path_folder,"eas")  ,full.names=T, recursive=T, pattern="out$")
+  # ,"elsa"  = list.files(file.path(path_folder,"elsa") ,full.names=T, recursive=T, pattern="out$")
+  # ,"hrs"   = list.files(file.path(path_folder,"hrs")  ,full.names=T, recursive=T, pattern="out$")
+  # ,"ilse"  = list.files(file.path(path_folder,"ilse") ,full.names=T, recursive=T, pattern="out$")
+  # ,"nuage" = list.files(file.path(path_folder,"nuage"),full.names=T, recursive=T, pattern="out$")
+  # ,"satsa" = list.files(file.path(path_folder,"satsa"),full.names=T, recursive=T, pattern="out$")
   # script estimation (outputs generated using IalsaSynthesis package, using datasets provided by IALSA Study Curator) 
-  ,"lasa"  = list.files(file.path(path_folder,"lasa") ,full.names=T, recursive=T, pattern="out$") # Cambridge version
-  ,"map"   = list.files(file.path(path_folder,"map")  ,full.names=T, recursive=T, pattern="out$")
-  ,"octo"  = list.files(file.path(path_folder,"octo") ,full.names=T, recursive=T, pattern="out$")
+  "lasa"  = list.files(file.path(path_folder,"lasa") ,full.names=T, recursive=T, pattern="out$") # Cambridge version
+  # "map"   = list.files(file.path(path_folder,"map")  ,full.names=T, recursive=T, pattern="out$")
+  # "octo"  = list.files(file.path(path_folder,"octo") ,full.names=T, recursive=T, pattern="out$")
 )
 
 # ---- inspect-data ------------------------------------------------
-list_path_out[["elsa"]]
-path <- list_path_out[["lasa"]][1]
-path <- list_path_out[["map"]][1]
-path <- list_path_out[["nuage"]][1]
+# list_path_out[["elsa"]]
+# path <- list_path_out[["lasa"]][1]
+# path <- list_path_out[["map"]][1]
+# path <- list_path_out[["nuage"]][1]
 
 # ---- tweak-data --------------------------------------------------
 # remove models that did not terminate normaly
 # at this point, detection is manual
-# a <- list_path_out[["elsa"]]
+# a <- list_path_out[["lasa"]]
 # b <- a[grepl("b1_female_aehplus_grip_gait.out$|b1_male_aehplus_grip_gait.out$", a)]
 # list_path_out[["elsa"]] <- setdiff(list_path_out[["elsa"]], b)
 
@@ -130,17 +132,23 @@ path <- list_path_out[["nuage"]][1]
 # ---- parse-model-outputs --------------------------------------------
 # do not combine into a loop for convenient, disjoint usage
 # manual estimation (outputs provided "as is" from the study drivers)
-collect_one_study(list_path_out,"eas",   selected_results, path_folder)
-collect_one_study(list_path_out,"elsa",  selected_results, path_folder)
-collect_one_study(list_path_out,"hrs",   selected_results, path_folder)
-collect_one_study(list_path_out,"ilse",  selected_results, path_folder)
-collect_one_study(list_path_out,"nuage", selected_results, path_folder)
-collect_one_study(list_path_out,"satsa", selected_results, path_folder)
+
+# NOTICE: at this point we suspect the support of extraction from manually estimated outputs
+# due to MplusAutomation version change, it unfeasble to support both extraction routines
+# Rely on the existed extrations products to support publication. 
+
+# collect_one_study(list_path_out,"eas",   selected_results, path_folder)
+# collect_one_study(list_path_out,"elsa",  selected_results, path_folder)
+# collect_one_study(list_path_out,"hrs",   selected_results, path_folder)
+# collect_one_study(list_path_out,"ilse",  selected_results, path_folder)
+# collect_one_study(list_path_out,"nuage", selected_results, path_folder)
+# collect_one_study(list_path_out,"satsa", selected_results, path_folder)
+# collect_one_study(list_path_out,"lasa",  selected_results, path_folder)
 
 # script estimation (outputs generated using IalsaSynthesis package, using datasets provided by IALSA Study Curator) 
 # collect_one_study(list_path_out,"lasa",  selected_results, path_folder)
-collect_one_study(list_path_out,"map",   selected_results, path_folder)
-collect_one_study(list_path_out,"octo",  selected_results, path_folder)
+# collect_one_study(list_path_out,"map",   selected_results, path_folder)
+# collect_one_study(list_path_out,"octo",  selected_results, path_folder)
 
 # ---- assemble-catalog ---------------------------------------------------------
 # create a path to the folder one step above from the study specific within project

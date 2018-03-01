@@ -70,6 +70,13 @@ get_msum <- function(
   # get a single model summary
   # ith_msum <- MplusAutomation::extractModelSummaries(target=path)
   ith_msum <- MplusAutomation::readModels(target=path)$summaries
+  # path <- "./model-output/physical-cognitive/studies/map/fev100-bnt/b1_female_a_fev100_bnt.out"
+  # path <- "./model-output/physical-cognitive/studies/eas/Gait/b1_female_ae_walking_executive_gait_trailsb.out"
+  # 
+  # file.exists(path)
+  # ith_msum <- MplusAutomation::readModels(path)
+  # 
+  # MplusAutomation::extractModelSummaries(path)
   
   
   # ith_msum %>% t()
@@ -621,7 +628,7 @@ collect_result <- function(
 ){
   # browser()
   # extract model idendification
-  mid <- get_id(path)
+  mid  <- get_id(path)
   msum <- get_msum(path)
   mpar <- get_mpar(path)
 

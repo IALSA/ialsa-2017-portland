@@ -100,25 +100,25 @@ d <- ds_long %>% filter(is.na(process_b_label))
 
 # ---- table-dynamic-long ----------------------------------------
 # inspect the created object via dynamic table
-ds_long %>%
-  dplyr::mutate(
-    # study_name    = factor(study_name),
-    process_a      = factor(process_a),
-    process_b      = factor(process_b),
-    process        = factor(process),
-    subgroup       = factor(subgroup),
-    coefficient    = factor(coefficient),
-    stat           = factor(stat)
-  ) %>%
+# ds_long %>%
+#   dplyr::mutate(
+#     # study_name    = factor(study_name),
+#     process_a      = factor(process_a),
+#     process_b      = factor(process_b),
+#     process        = factor(process),
+#     subgroup       = factor(subgroup),
+#     coefficient    = factor(coefficient),
+#     stat           = factor(stat)
+#   ) %>%
   # dplyr::filter(model_type=="aehplus" & subgroup=="female" & process_a=="grip") %>%
   # dplyr::filter(model_type=="aehplus" & subgroup=="female" & process_a=="grip" & study_name =="map") %>%
-  dplyr::select(-g, -model_type, -subgroup, -process_a, -parameter_count) %>%
-  DT::datatable(
-    class     = 'cell-border stripe',
-    caption   = "Growth Curve Model Solution --Long Format",
-    filter    = "top",
-    options   = list(pageLength = 6, autoWidth = TRUE)
-  )
+  # dplyr::select(-g, -model_type, -subgroup, -process_a, -parameter_count) %>%
+  # DT::datatable(
+  #   class     = 'cell-border stripe',
+  #   caption   = "Growth Curve Model Solution --Long Format",
+  #   filter    = "top",
+  #   options   = list(pageLength = 6, autoWidth = TRUE)
+  # )
 
 # ---- remove-duplicates ----------------------------------------
 define_duplicates <- c(  model_components[["id"]]

@@ -8,7 +8,8 @@
 
 # ---- physical-physical -----------------------------------------
 # Physical-physical stream
-base::source("./manipulation/physical-physical/0-parser.R") 
+# base::source("./manipulation/physical-physical/0-parser.R") 
+# NOTE: `0-parser` should only assemble the catalog. Parse manually.
 base::source("./manipulation/physical-physical/1-cleaner.R")
 base::source("./manipulation/physical-physical/2-augmentor.R")
 base::source("./manipulation/physical-physical/3-transformer.R")
@@ -17,6 +18,7 @@ base::source("./manipulation/physical-physical/3-transformer.R")
 # ---- physical-cognitive -----------------------------------------
 # Physical-cognitive stream
 # base::source("./manipulation/physical-cognitive/0-parser.R") # needs debugging. For now, inherit from IALSA-2015-
+# NOTE: `0-parser` should only assemble the catalog. Parse manually if any of studies estimated manually.
 base::source("./manipulation/physical-cognitive/1-cleaner.R")
 base::source("./manipulation/physical-cognitive/2-augmentor.R")
 base::source("./manipulation/physical-cognitive/3-transformer.R")
