@@ -1,4 +1,4 @@
-Project: Pulmonary function and cognition
+Project: Associations in Physical Decline
 ----
 Table of correlations contains correlations between factor scores of intercepts, slopes, residuals in a bivariate linear growth model. 
 - [focus][corr_focus] - static tables in MS Word format, focusing on estimated correlations 
