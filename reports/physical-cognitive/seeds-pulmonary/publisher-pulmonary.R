@@ -15,15 +15,15 @@ path_satsa <- base::file.path("./reports/physical-cognitive/seeds-pulmonary/seed
 #  Define groups of reports
 allReports<- c(
    path_eas
-  ,path_elsa
-  ,path_hrs
-  # # # path_ilse # does not have pulmonary measure
-  ,path_lasa
-  ,path_map
-  ,path_nas
-  # # # path_nuage # does not have pulmonary measure
-  ,path_octo
-  ,path_satsa
+  # ,path_elsa
+  # ,path_hrs
+  # # # # path_ilse # does not have pulmonary measure
+  # ,path_lasa
+  # ,path_map
+  # ,path_nas
+  # # # # path_nuage # does not have pulmonary measure
+  # ,path_octo
+  # ,path_satsa
 )
 
 # allReports <- path_elsa

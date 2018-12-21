@@ -30,55 +30,31 @@ model_type_set <- c("a", "ae", "aeh", "aehplus","full") # spread at model type l
 # catalog containing model results
 catalog_wide <- readr::read_csv("./model-output/physical-cognitive/2-catalog-wide.csv",col_names = TRUE)
 catalog_long <- readr::read_csv("./model-output/physical-cognitive/3-catalog-long.csv",col_names = TRUE)
-
-# catalog <- read.csv("./data/shared/pc-2-catalog-augmented.csv", header = T,  stringsAsFactors=FALSE)
-# catalog_spread <- readRDS("./data/shared/derived/pc-spread.rds")
-
-
-catalog_long %>% dplyr::glimpse()
-catalog_wide %>% dplyr::glimpse()
-# template for structuring tables for reporting individual models
-# stencil <- readr::read_csv("./data/shared/tables/study-specific-stencil-v7.csv")
+# additional data to guide table/graph production
 stencil <- readr::read_csv("./data/public/raw/stencils/study-specific-stencil-v10.csv")
 domain_renaming_stencil <- readr::read_csv("./reports/physical-cognitive/seeds-pulmonary/pulmonary-domain-structure-dead.csv")
+
+catalog <- catalog_wide
+catalog_spread <- catalog_long
+# 
+# catalog <- read.csv("./data/shared/pc-2-catalog-augmented.csv", header = T,  stringsAsFactors=FALSE)
+# catalog_spread <- readRDS("./data/shared/derived/pc-spread.rds")
+# catalog %>% dplyr::glimpse()
+# catalog_spread %>% dplyr::glimpse()
+# template for structuring tables for reporting individual models
+# stencil <- readr::read_csv("./data/shared/tables/study-specific-stencil-v7.csv")
+# stencil <- readr::read_csv("./data/shared/tables/study-specific-stencil-v10.csv")
+
 # ---- tweak-data ---------------------------------------------
-# perform custom touch-up, local to physical-cognitive track
-catalog_long <- catalog_long %>%
-  dplyr::filter(!process_a == "fev100") %>% # remove temporary items (usually for testing)
-  dplyr::filter(model_type == "aehplus",model_number=="b1") %>%   # limit the scope
-  dplyr::left_join(domain_renaming_stencil, by = c("study_name", "process_b","process_b_domain")) %>%
-  dplyr::mutate(
-    process_b_domain = process_b_domain_new # overwrite with new values
-  ) %>%
-  dplyr::select(-process_b_domain_new) %>%    # remove dublicated columns
-  dplyr::mutate(
-    process_b = process_b_label,       # replace domain structure
-    process_b_domain = process_b_domain_label  # with custom specification
-  ) %>%
-  dplyr::select(-process_b_label, -process_b_domain_label)
 
-
-catalog_wide <- catalog_wide %>%
-  dplyr::filter(!process_a == "fev100") %>% # remove temporary items (usually for testing)
-  # dplyr::filter(model_type == "aehplus",model_number=="b1") %>%   # limit the scope
-  dplyr::left_join(domain_renaming_stencil, by = c("study_name", "process_b","process_b_domain")) %>%
-  dplyr::mutate(
-    process_b_domain = process_b_domain_new # overwrite with new values
-  ) %>%
-  dplyr::select(-process_b_domain_new) %>%    # remove dublicated columns
-  dplyr::mutate(
-    process_b = process_b_label,       # replace domain structure
-    process_b_domain = process_b_domain_label  # with custom specification
-  ) %>%
-  dplyr::select(-process_b_label, -process_b_domain_label)
 
 # ---- explorations -------------------------------------------
-catalog_wide %>% view_options(
-  study_name_ ="nas"
+catalog_spread %>% view_options(
+  study_name_ ="eas"
   ,full_id     = T
-  # ,subgroups   = c("female")
+  # ,subgroups   = c("male")
   ,model_types = c("aehplus")
-  # ,processes_a = "pef"
+  ,processes_a = "pef"
   # ,processes_b = "symbol"
 )
 
@@ -86,14 +62,14 @@ catalog_wide %>% view_options(
 # ---- print-functions -----------------
 
 print_header <- function(
-  catalog_wide
+  catalog_spread
 ){
   cat("\n# Available models \n")
   print(cat("\n",paste0("Study **",toupper(study),"** have contributed the following outcome pairs to the IASLA-2015-Portland model pool:"),"\n"))
   cat("\n")
   print(
     knitr::kable(
-      view_options(catalog_wide
+      view_options(catalog_spread
                    ,study_name_ = study#"eas"
                    ,full_id     = F
                    ,subgroups   = c("female","male")
@@ -108,7 +84,7 @@ print_header <- function(
     cat("\n")
     print(
       knitr::kable(
-        view_options(catalog_wide
+        view_options(catalog_spread
                      ,study_name_ = study#"eas"
                      ,full_id     = T
                      ,subgroups   = gender
@@ -123,19 +99,29 @@ print_header <- function(
 }
 
 print_body <- function(
-  catalog_wide,
-  catalog_long
+  catalog_spread,
+  catalog
 ){
-  
+  # debugging set up
+  # d                   = catalog_long
+  # study               = "eas" #'elsa'
+  # gender              = "male"
+  # outcome             = "pef"# "fev"
+  # model_type_standard = "aehplus" # spread at outcome pair level
+  # model_type_set      = c("a", "ae", "aeh", "aehplus", "full") # spread at model type level
+  # print_format        = "pandoc"
+  # 
+  # 
   for(gender in c("female","male")){
     # if(gender == "female"){
     #   processes_b <- c("block", "digit_tot","symbol", "trailsb")
     # }else{ # covariate sets may differ by gender, both must have the standard "aehplus"
     #   processes_b <- c("block", "digit_tot","symbol", "trailsb") # fas would break it no standard
     # }
+    # browser()
     cat("\n#",gender,"\n")
     print_outcome_pairs(
-      d = catalog_wide
+      d = catalog_spread
       ,study = study#'eas'
       ,gender = gender
       ,outcome = outcome#"pef"
@@ -147,7 +133,7 @@ print_body <- function(
     cat("\n",paste0("Study = _",toupper(study),"_; Gender = _",gender,"_; Process (a) = _",outcome,"_\n"))
     cat("\n Computed correlations:\n")
     print_coefficients(
-      d = catalog_long
+      d = catalog
       ,study_name    = study
       ,subgroup      = gender
       ,pivot         = outcome
@@ -166,7 +152,7 @@ print_body <- function(
     cat("\n")
     cat("P-values for corresponding covariances: \n")
     print_coefficients(
-      d              = catalog_long         # contains model solutions, row = model
+      d              = catalog         # contains model solutions, row = model
       ,study_name    = study           # name of study
       ,subgroup      = gender          # gender : male or female
       ,pivot         = outcome         # fixed; name of process 1
@@ -186,8 +172,8 @@ print_body <- function(
 }
 
 print_body_gender <- function(
-  catalog_wide,
-  catalog_long,
+  catalog_spread,
+  catalog,
   gender_value
 ){
   
@@ -199,7 +185,7 @@ print_body_gender <- function(
     # }
     cat("\n#",gender,"\n")
     print_outcome_pairs(
-      d = catalog_wide
+      d = catalog_spread
       ,study = study#'eas'
       ,gender = gender
       ,outcome = outcome#"pef"
@@ -211,7 +197,7 @@ print_body_gender <- function(
     cat("\n",paste0("Study = _",toupper(study),"_; Gender = _",gender,"_; Process (a) = _",outcome,"_\n"))
     cat("\n Computed correlations:\n")
     print_coefficients(
-      d = catalog_long
+      d = catalog
       ,study_name    = study
       ,subgroup      = gender
       ,pivot         = outcome
@@ -228,7 +214,7 @@ print_body_gender <- function(
     cat("\n")
     cat("P-values for corresponding covariances: \n")
     print_coefficients(
-      d              = catalog_long         # contains model solutions, row = model
+      d              = catalog         # contains model solutions, row = model
       ,study_name    = study           # name of study
       ,subgroup      = gender          # gender : male or female
       ,pivot         = outcome         # fixed; name of process 1
@@ -248,11 +234,13 @@ print_body_gender <- function(
 
 
 # ---- eas ---------------------------------------------------------
+
 study <- 'eas'
 outcome <- "pef"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
+
 
 # elsa has only "aehplus" form
 # ---- elsa ---------------------------------------------------------
@@ -260,22 +248,22 @@ study <- 'elsa'
 # outcome <- "fev100"
 outcome <- "fev"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
 
 # ---- hrs ---------------------------------------------------------
 study <- 'hrs'
 outcome <- "pef"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
 
 # ---- octo ---------------------------------------------------------
 study <- 'octo'
 outcome <- "pef"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
 
 
 # lasa has only "aehplus" form
@@ -283,30 +271,30 @@ print_body(catalog_wide, catalog_long)
 study <- 'lasa'
 outcome <- "pef"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
 
 
 # ---- map ---------------------------------------------------------
 study <- 'map'
 outcome <- "fev"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
 
 # ---- nas ---------------------------------------------------------
 study <- 'nas'
 outcome <- "fev"
 
-print_header(catalog_wide)
-print_body_gender(catalog_wide, catalog_long, "male")
+print_header(catalog_spread)
+print_body_gender(catalog_spread, catalog, "male")
 
 # ---- satsa ---------------------------------------------------------
 study <- 'satsa'
 outcome <- "fev"
 
-print_header(catalog_wide)
-print_body(catalog_wide, catalog_long)
+print_header(catalog_spread)
+print_body(catalog_spread, catalog)
 
 
 
