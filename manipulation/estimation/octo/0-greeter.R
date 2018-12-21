@@ -61,7 +61,7 @@ varnames_context <- c(
   ,"Smoke"     # Smoking
   ,"CVD1"      # cardio vascular disease at wave 0
   ,"diabYN1"   # diabetes at wave 0
-  ,"DemEver"   # dementia every
+  ,"DemEver"   # dementia ever
 )
 
 varnames_physical <- c(
@@ -99,7 +99,7 @@ selected_items <- c(
 
 ds <- as.data.frame(ds0[ , selected_items])
 
-ds %>% dplyr::glimpse()
+ds %>% dplyr::glimpse(40)
 
 # ---- rename-variables -------------------------------
 
@@ -124,6 +124,11 @@ names(ds) <- gsub("mirrcg","mirrecog_0", names(ds))
 names(ds) <- gsub("clock" ,"clock_0", names(ds))
 
 
+library(dplyr)
+d <- ds %>% dplyr::select(Case, PairID, TwinID, Smoke)
+d %>% glimpse()
+d[is.nan(d)] <- NA
+
 # ---- center-covariates ---------------------------------
 ds_wide <- ds %>%
   dplyr::mutate(
@@ -132,7 +137,16 @@ ds_wide <- ds %>%
     edu_c7  = Educyrs - 7,
     htm_c   = ifelse(            male==0, (height1 - 160)/100,
                                  ifelse(male==1, (height1 - 172)/100,NA)),
-    smoke    = ifelse(Smoke %in% c(1,2,3),1,0),
+    # smoke = ifelse(is.nan(Smoke), NA, Smoke),
+    
+    smoke    = ifelse(
+      test = is.nan(Smoke), yes = NA , no = ifelse(
+        test = Smoke %in% c(1,2,3)
+        ,yes = 1
+        ,no = 0
+      )
+    ),
+
     cardio   = CVD1,
     diabetes = diabYN1,
     dementia_ever = DemEver
@@ -147,6 +161,7 @@ ds_wide <- ds %>%
   dplyr::select(
     -TwinID, -Female, -CompAge1,-Smoke, -height1,-DemEver, -Educyrs, -CVD1, -diabYN1
   )
+ds_wide %>% dplyr::group_by(smoke) %>% dplyr::count()
 
 ds_wide %>%
   dplyr::filter(male ==0) %>%
