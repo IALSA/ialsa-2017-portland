@@ -26,16 +26,16 @@ Please follow the links above to review the scope and results of the individual 
 
   <sup>1</sup> Veiw study descriptives after the link   
 
-[eas_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_EAS_Descriptives_IALSA_Portland.pdf 
-[elsa_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_ELSA_Descriptives_IALSA_Portland.pdf   
-[hrs_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_HRS_Descriptives_IALSA_Portland.pdf 
-[ilse_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_ILSE_Descriptives_IALSA_Portland.pdf 
-[lasa_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_LASA_Descriptives_IALSA_Portland.pdf  
-[map_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_RADC_Descriptives_IALSA_Portland.pdf
-[nas_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_NAS_Descriptives_IALSA_Portland.pdf 
-[nuage_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_NuAge_Descriptives_IALSA_Portland.pdf
-[octo_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_OCDTO_Descriptives_IALSA_Portland.pdf
-[satsa_table_1]:https://rawgit.com/IALSA/ialsa-2017-portland/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
+[eas_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_EAS_Descriptives_IALSA_Portland.pdf
+[elsa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_ELSA_Descriptives_IALSA_Portland.pdf   
+[hrs_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_HRS_Descriptives_IALSA_Portland.pdf 
+[ilse_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_ILSE_Descriptives_IALSA_Portland.pdf 
+[lasa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_LASA_Descriptives_IALSA_Portland.pdf  
+[map_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_RADC_Descriptives_IALSA_Portland.pdf
+[nas_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NAS_Descriptives_IALSA_Portland.pdf 
+[nuage_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NuAge_Descriptives_IALSA_Portland.pdf
+[octo_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_OCDTO_Descriptives_IALSA_Portland.pdf
+[satsa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
 
   
 
@@ -63,8 +63,8 @@ The primary aim of the workshop was to examine associations between changes in p
 
 ## Publications
 
- - [Big Data, Big Analyses: CAR method explained](https://rawgit.com/IALSA/IALSA-2015-Portland/ad055bfff825d257cb4bcb83d51fc6dead53d227/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf), Canadian Psychological Association, June 16, 2016. 
- - [A Collaborative Modeling Framework for Multi-Study Coordinated Analyses](https://rawgit.com/IALSA/IALSA-2015-Portland/master/pubs/2015-talks/2015-07-22-wellcome-trust/A%20Collaborative%20Modeling%20Framework%20for%20Multi-Study%20Coordinated%20Analyses.html), *Wellcome Trust Conference*, July 22, 2015. 
+ - [Big Data, Big Analyses: CAR method explained](https://raw.githack.com/IALSA/IALSA-2015-Portland/ad055bfff825d257cb4bcb83d51fc6dead53d227/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf), Canadian Psychological Association, June 16, 2016. 
+ - [A Collaborative Modeling Framework for Multi-Study Coordinated Analyses](https://raw.githack.com/IALSA/IALSA-2015-Portland/master/pubs/2015-talks/2015-07-22-wellcome-trust/A%20Collaborative%20Modeling%20Framework%20for%20Multi-Study%20Coordinated%20Analyses.html), *Wellcome Trust Conference*, July 22, 2015. 
 
 </br>  
 
