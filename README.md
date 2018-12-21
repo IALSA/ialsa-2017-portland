@@ -11,20 +11,20 @@ IALSA-2015-Portland workshop performs a **coordinated analysis with replication 
 
 Please follow the links above to review the scope and results of the individual track.
 
-| Study<sup>1</sup> | Contact | 
+| Study | Contact | 
 | :---- | :------ | 
-| [EAS][eas_table_1]        |[Andrea Zammit](mailto:Andrea.Zammit@einstein.yu.edu)   | 
-| [ELSA][elsa_table_1]      |[Annie Robitaille](mailto:annie.g.robitaille@gmail.com) |  
-| [HRS][hrs_table_1]        |[Chenkai Wu](mailto:chenkai.wu2010@gmail.com)           | 
-| [ILSE][ilse_table_1]      |[Philipp Handschuh](mailto:philipp.handschuh@uni-ulm.de)|  
-| [LASA][lasa_table_1]      |[Annie Robitaille](mailto:annie.g.robitaille@gmail.com) |
-| [MAP][map_table_1]        |[Cassandra Brown](mailto:clb@uvic.ca)                   | 
-| [NAS][nas_table_1]        |[Lewina Lee](mailto:lewina@bu.edu)                      |  
-| [NuAge][nuage_table_1]    |[Valerie Jarry ](mailto:valerie.jarry@umontreal.ca )    | 
-| [OCTO-Twin][octo_table_1] |[Marcus Praetorius](mailto:marcus.praetorius@psy.gu.se) |   
-| [SATSA][satsa_table_1]    |[Deborah Finkel](mailto:dfinkel@ius.edu)                |   
+| EAS        |[Andrea Zammit](mailto:Andrea.Zammit@einstein.yu.edu)   | 
+| ELSA     |[Annie Robitaille](mailto:annie.g.robitaille@gmail.com) |  
+| HRS     |[Chenkai Wu](mailto:chenkai.wu2010@gmail.com)           | 
+| ILSE    |[Philipp Handschuh](mailto:philipp.handschuh@uni-ulm.de)|  
+| LASA    |[Annie Robitaille](mailto:annie.g.robitaille@gmail.com) |
+| MAP       |[Cassandra Brown](mailto:clb@uvic.ca)                   | 
+| NAS       |[Lewina Lee](mailto:lewina@bu.edu)                      |  
+| NuAge    |[Valerie Jarry ](mailto:valerie.jarry@umontreal.ca )    | 
+| OCTO-Twin|[Marcus Praetorius](mailto:marcus.praetorius@psy.gu.se) |   
+| SATSA  |[Deborah Finkel](mailto:dfinkel@ius.edu)                |   
 
-  <sup>1</sup> Veiw study descriptives after the link  
+ 
   
 
 ## Models
