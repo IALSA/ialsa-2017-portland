@@ -61,7 +61,7 @@ The current repository analyzes the results of the IALSA Analysis Workshop ([pdf
 The primary aim of the workshop was to examine associations between changes in physical functioning (i.e., grip strength, pulmonary function, chair stands, walking speed) and cognitive functioning (i.e., measures of speed, memory, reasoning, executive functioning) in multiple-study comparative framework. Bivariate growth processes were estimated to evaluate dynamic associations in change and variation within and across these domains and in relation to sample and individual differences in age, lifestyle, and health outcomes. The results from these analyses will extend recent systematic reviews and meta-analyses (e.g., [Clouston et al., 2012, Epidemiological Reviews](https://www.dropbox.com/s/vfe7u2ez5oxp3ev/Clouston_2013_Epidemiol%20Rev.pdf?dl=0) and will be submitted for publication as a set of independent brief reports, capped by a literature review/overview of analysis and completed with a research synthesis summary.
 
 
-## Publications
+## Publications and Presentations
 
  - [Big Data, Big Analyses: CAR method explained](https://raw.githack.com/IALSA/IALSA-2015-Portland/ad055bfff825d257cb4bcb83d51fc6dead53d227/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf), Canadian Psychological Association, June 16, 2016. 
  - [A Collaborative Modeling Framework for Multi-Study Coordinated Analyses](https://raw.githack.com/IALSA/IALSA-2015-Portland/master/pubs/2015-talks/2015-07-22-wellcome-trust/A%20Collaborative%20Modeling%20Framework%20for%20Multi-Study%20Coordinated%20Analyses.html), *Wellcome Trust Conference*, July 22, 2015. 
@@ -73,7 +73,8 @@ The primary aim of the workshop was to examine associations between changes in p
 Methodology 
  - [Andrea Piccinin](mailto:piccinin@uvic.ca)   
  - [Graciela Muniz](mailto:gm299@cam.ac.uk)  
- - [Annie Robitaille](mailto:annie.g.robitaille@gmail.com)
+ - [Annie Robitaille](mailto:annie.g.robitaille@gmail.com)  
+ 
 Data Science  
  - [Andriy Koval](mailto:andkov@uvic.ca)  
  - [Will Beasley](mailto:wibeasley@hotmail.com)  
