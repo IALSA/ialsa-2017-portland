@@ -9,7 +9,7 @@ IALSA-2017-Portland workshop performs a **coordinated analysis with replication 
 
 * [`pulmonary-cognitive`](/projects/pulmonary-cognitive) - Associations between changes in **pulmonary** function and changes in cognitive function.
 
-
+## Participating studies
 
 | Study<sup>1</sup> | Contact | 
 | :---- | :------ | 
