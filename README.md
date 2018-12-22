@@ -1,15 +1,15 @@
-# ialsa-2017-portland
-Coordinated Analysis with Replication  (CAwR) across 10 longitudinal studies: Bivariate curve model of physical and cognitive decline.
+[![logl](libs/images/ialsa_long.png)](http://www.ialsa.org/)
+
+IALSA is funded through an NIH/NIA Program Project Grant ([P01AG043362](https://projectreporter.nih.gov/project_info_description.cfm?aid=8414933&icde=18870651&ddparam=&ddvalue=&ddsub=&cr=3&csb=default&cs=ASC); 2013-2018) to Oregon Health & Science University (Program Directors: [Scott Hofer](https://www.maelstrom-research.org/mica/network/ialsa#/users/hofer), [Andrea Piccinin](https://www.maelstrom-research.org/mica/network/ialsa#/users/piccinin), [Jeffrey Kaye](https://www.maelstrom-research.org/mica/network/ialsa#/users/kaye), and [Diana Kuh](https://www.maelstrom-research.org/mica/network/ialsa#/users/kuh)) and previously funded by NIH/NIA ([R01AG026453](https://projectreporter.nih.gov/project_info_description.cfm?aid=7210005&icde=19139556&ddparam=&ddvalue=&ddsub=&cr=5&csb=default&cs=ASC); 2007-2013) and CIHR (103284; 2010-2013).
 
 
 # Concurrent decline of body and mind  
 
-IALSA-2015-Portland workshop performs a **coordinated analysis with replication (CAR)** of decline in physical and cognitive functioning during later adulthood. The research agenda distinguishes the following foci:    
+IALSA-2017-Portland workshop performs a **coordinated analysis with replication (CAwR)** across 10 longitudinal studies investigating the decline in physical and cognitive functioning during later adulthood using bivariate growth curve models. Our publication strategy distinguished the following pairs of criteria: 
 
 * [`pulmonary-cognitive`](/projects/pulmonary-cognitive) - Associations between changes in **pulmonary** function and changes in cognitive function.
 
 
-Please follow the links above to review the scope and results of the individual track.
 
 | Study<sup>1</sup> | Contact | 
 | :---- | :------ | 
@@ -39,7 +39,7 @@ Please follow the links above to review the scope and results of the individual 
 
   
 
-## Models
+## Model form
 Any model in the collective can be specified by a form nested within the following general **specification**:  
 [![general_model_specification](./libs/images/general_model_specification.png)](./reports/model_specification/README.md)  
 </br>
@@ -70,15 +70,13 @@ The primary aim of the workshop was to examine associations between changes in p
 
 ## Contacts
 
- - [Andriy Koval](mailto:andkov@uvic.ca)  
+Methodology 
  - [Andrea Piccinin](mailto:piccinin@uvic.ca)   
  - [Graciela Muniz](mailto:gm299@cam.ac.uk)  
- - [Will Beasley](mailto:wibeasley@hotmail.com)  
  - [Annie Robitaille](mailto:annie.g.robitaille@gmail.com)
-
-### Thanks to Funders
-
-IALSA is funded through an NIH/NIA Program Project Grant ([P01AG043362](https://projectreporter.nih.gov/project_info_description.cfm?aid=8414933&icde=18870651&ddparam=&ddvalue=&ddsub=&cr=3&csb=default&cs=ASC); 2013-2018) to Oregon Health & Science University (Program Directors: [Scott Hofer](https://www.maelstrom-research.org/mica/network/ialsa#/users/hofer), [Andrea Piccinin](https://www.maelstrom-research.org/mica/network/ialsa#/users/piccinin), [Jeffrey Kaye](https://www.maelstrom-research.org/mica/network/ialsa#/users/kaye), and [Diana Kuh](https://www.maelstrom-research.org/mica/network/ialsa#/users/kuh)) and previously funded by NIH/NIA ([R01AG026453](https://projectreporter.nih.gov/project_info_description.cfm?aid=7210005&icde=19139556&ddparam=&ddvalue=&ddsub=&cr=5&csb=default&cs=ASC); 2007-2013) and CIHR (103284; 2010-2013).
+Data Science  
+ - [Andriy Koval](mailto:andkov@uvic.ca)  
+ - [Will Beasley](mailto:wibeasley@hotmail.com)  
 
 
 
