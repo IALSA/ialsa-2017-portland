@@ -76,7 +76,10 @@ The primary aim of the workshop was to examine associations between changes in p
  - [Will Beasley](mailto:wibeasley@hotmail.com)  
  - [Annie Robitaille](mailto:annie.g.robitaille@gmail.com)
 
- 
+### Thanks to Funders
+
+IALSA is funded through an NIH/NIA Program Project Grant ([P01AG043362](https://projectreporter.nih.gov/project_info_description.cfm?aid=8414933&icde=18870651&ddparam=&ddvalue=&ddsub=&cr=3&csb=default&cs=ASC); 2013-2018) to Oregon Health & Science University (Program Directors: [Scott Hofer](https://www.maelstrom-research.org/mica/network/ialsa#/users/hofer), [Andrea Piccinin](https://www.maelstrom-research.org/mica/network/ialsa#/users/piccinin), [Jeffrey Kaye](https://www.maelstrom-research.org/mica/network/ialsa#/users/kaye), and [Diana Kuh](https://www.maelstrom-research.org/mica/network/ialsa#/users/kuh)) and previously funded by NIH/NIA ([R01AG026453](https://projectreporter.nih.gov/project_info_description.cfm?aid=7210005&icde=19139556&ddparam=&ddvalue=&ddsub=&cr=5&csb=default&cs=ASC); 2007-2013) and CIHR (103284; 2010-2013).
+
 
 
 <!-- Below stored the short-cuts for links -->

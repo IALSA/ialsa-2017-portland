@@ -9,19 +9,31 @@ Table of correlations contains correlations between factor scores of intercepts,
 - [meta analyis spreadsheet][meta-analysis] - meta analysis conducted outside of R, using Excel macro (under construction at the moment)
 
 
-|Study<sup>1</sup> | Initial Summary Report |
-|---|---|
-[EAS][eas_table_1]      | [word][eas_word]    |
-[ELSA][elsa_table_1]    | [word][elsa_word]   |
-[HRS][hrs_table_1]      | [word][hrs_word]    |
-[ILSE][ilse_table_1]    | [word][ilse_word]   |
-[LASA][lasa_table_1]    | [word][lasa_word]   |
-[MAP][map_table_1]      | [word][map_word]    |
-[NuAge][nuage_table_1]  | [word][nuage_word]  |
-[OCTO][octo_table_1]    | [word][octo_word]   |
-[SATSA][satsa_table_1]  | [word][satsa_word]  |
+| Study<sup>1</sup> | Contact | 
+| :---- | :------ | 
+| [EAS][eas_table_1]        |[Andrea Zammit](mailto:Andrea.Zammit@einstein.yu.edu)   | 
+| [ELSA][elsa_table_1]      |[Annie Robitaille](mailto:annie.g.robitaille@gmail.com) |  
+| [HRS][hrs_table_1]        |[Chenkai Wu](mailto:chenkai.wu2010@gmail.com)           | 
+| [ILSE][ilse_table_1]      |[Philipp Handschuh](mailto:philipp.handschuh@uni-ulm.de)|  
+| [LASA][lasa_table_1]      |[Annie Robitaille](mailto:annie.g.robitaille@gmail.com) |
+| [MAP][map_table_1]        |[Cassandra Brown](mailto:clb@uvic.ca)                   | 
+| [NAS][nas_table_1]        |[Lewina Lee](mailto:lewina@bu.edu)                      |  
+| [NuAge][nuage_table_1]    |[Valerie Jarry ](mailto:valerie.jarry@umontreal.ca )    | 
+| [OCTO-Twin][octo_table_1] |[Marcus Praetorius](mailto:marcus.praetorius@psy.gu.se) |   
+| [SATSA][satsa_table_1]    |[Deborah Finkel](mailto:dfinkel@ius.edu)                |   
 
-<sup>1</sup> - Descriptives available after the link.
+  <sup>1</sup> Veiw study descriptives after the link   
+
+[eas_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_EAS_Descriptives_IALSA_Portland.pdf
+[elsa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_ELSA_Descriptives_IALSA_Portland.pdf   
+[hrs_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_HRS_Descriptives_IALSA_Portland.pdf 
+[ilse_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_ILSE_Descriptives_IALSA_Portland.pdf 
+[lasa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_LASA_Descriptives_IALSA_Portland.pdf  
+[map_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_RADC_Descriptives_IALSA_Portland.pdf
+[nas_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NAS_Descriptives_IALSA_Portland.pdf 
+[nuage_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NuAge_Descriptives_IALSA_Portland.pdf
+[octo_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_OCDTO_Descriptives_IALSA_Portland.pdf
+[satsa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
 
 ## Model
 All fitted models can be specified by a form nested within the following general **specification**:  
