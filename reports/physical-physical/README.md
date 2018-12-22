@@ -32,7 +32,7 @@ Table of correlations contains correlations between factor scores of intercepts,
 [map_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_RADC_Descriptives_IALSA_Portland.pdf
 [nas_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NAS_Descriptives_IALSA_Portland.pdf 
 [nuage_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_NuAge_Descriptives_IALSA_Portland.pdf
-[octo_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_OCDTO_Descriptives_IALSA_Portland.pdf
+[octo_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_OCTO_Descriptives_IALSA_Portland.pdf
 [satsa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
 
 ## Model
