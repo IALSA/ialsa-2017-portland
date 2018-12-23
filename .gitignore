@@ -19,6 +19,7 @@ model-output/*/*/*/*/*/*.*
 model-output/*/*/*/*/*/*/*.*
 !model-output/README.md
 
+reports/physical-cognitive/forest/forest-plot-pulmonary/*
 ## Exceptions
 !data/unshared/README.md
 !data/unshared/raw/README.md
