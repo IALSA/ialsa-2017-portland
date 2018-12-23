@@ -8,18 +8,18 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 
 ## Supplemental Materials
 
-- Forest plosts of all [Intercepts][forintercepts] (pdf)
-- Forest plosts of all [Slopes][forslopes] (pdf)
+- Forest plosts of all [Intercepts][intercepts] (pdf)
+- Forest plosts of all [Slopes][residuals] (pdf)
 - [Supplemental Tables][suptables] (pdf)
 
 [intercepts]:Intercept-Forest-Plots.pdf
-[residuals]:Residual-Forest-Plots
-[suptables]:Supplemental-Tables
+[residuals]:Residual-Forest-Plots.pdf
+[suptables]:Supplemental-Tables.pdf
 
 ## Figure 1
 
-![fig1][fig1]
+[![fig1][fig1]][fig1]
 
-[fig1]:Figure-1-Mental-Status.jpg
+[fig1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/pulmonary/Figure-1-Mental-Status.jpg
 
 
