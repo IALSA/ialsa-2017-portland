@@ -4,7 +4,7 @@ Project: Pulmonary function and cognition
 
 ## Estimation results
 
-Along with the study descriptives, the following table provides link to reports tabulating estimation results from each of model. To examine the raw MPlus output files, from which these estimates were extracted, please download [a dedicated archive][model-output].
+Along with the study descriptives, the following table provides link to reports tabulating estimation results from each of model. To examine the raw MPlus output files, from which these estimates were extracted, please access [a dedicated shared location][model-output] after the link.
 
 [model-output]:https://drive.google.com/drive/folders/1VFmwidKSDKGnLuk24ZPg91xY2iL9kDAH?usp=sharing
 
@@ -31,18 +31,14 @@ Table of correlations between factor scores of intercepts, slopes, residuals in 
 - [dynamic][corr_dynamic] - HTML report with forest plots  and dynamic summary table 
 - [table data][table-data] - stand-alone `csv` files containing source data of the all above reports
 
-## Slopes across domains
-[![female slopes](https://github.com/IALSA/IALSA-2015-Portland/blob/master/reports/domain-map/figure-png/print-domain-map-5.png)](https://raw.githubusercontent.com/IALSA/IALSA-2015-Portland/master/reports/domain-map/figure-png/print-domain-map-5.png)
-
-[![male slopes](https://github.com/IALSA/IALSA-2015-Portland/blob/master/reports/domain-map/figure-png/print-domain-map-17.png)](https://raw.githubusercontent.com/IALSA/IALSA-2015-Portland/master/reports/domain-map/figure-png/print-domain-map-17.png)
 
 ## Model form
 Any model in the collective can be specified by a form nested within the following general **specification**:  
-[![general_model_specification](./libs/images/general_model_specification.png)](./reports/model_specification/README.md)  
+[![general_model_specification](../../libs/images/general_model_specification.png)](../../reports/model_specification/README.md)  
 </br>
 with **covariance structure** given as
-[![general_model_specification](./libs/images/specification_covariance_structure.png)](./reports/model_specification/README.md)  
-For  details see [model specification](./reports/model-specification/README.md).  
+[![general_model_specification](../../libs/images/specification_covariance_structure.png)](../../reports/model_specification/README.md)  
+For  details see [model specification](../../reports/model-specification/README.md).  
 
 # People 
 
