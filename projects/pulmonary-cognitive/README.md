@@ -67,9 +67,9 @@ For  details see [model specification](../../reports/model-specification/README.
 
 <!-- Below stored the short-cuts for links -->  
 
-  [corr_focus]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/correlation-3/correlation-3-pulmonary-focus.docx
-   [corr_full]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/correlation-3/correlation-3-pulmonary-full.docx
-[corr_dynamic]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/correlation-3/correlation-3-pulmonary-summary.html
+  [corr_focus]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/forest/forest-pulmonary-focus.docx
+   [corr_full]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/forest/forest-pulmonary-full.docx
+[corr_dynamic]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/forest/forest-pulmonary-summary.html
   [domain_map]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/domain-map/domain-map-pulmonary.html
   [table-data]:https://github.com/IALSA/ialsa-2017-portland/tree/master/reports/physical-cognitive/forest/table-data
   
