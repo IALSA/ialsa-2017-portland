@@ -8,10 +8,10 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 
 # Table of Contents
 
-- [Supplemental Materials](#Supplemental Materials)
+- [Supplemental Materials](#Supplemental-Materials)
 - [Figures](#Figures)
-- [Estimation results](#Estimation results)
-- [Tabulated summaries](#Tabulated summaries)
+- [Estimation results](#Estimation-results)
+- [Tabulated summaries](#Tabulated-summaries)
 - [People](#People) 
 
 # Supplemental Materials
