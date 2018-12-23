@@ -12,7 +12,7 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 - Figures
 - Estimation results
 - Tabulated summaries
-- People 
+- [People](#People) 
 
 # Supplemental Materials
 
@@ -95,7 +95,7 @@ Along with the study descriptives, the following table provides link to reports 
 
 <sup>1</sup> - Descriptives available after the link.
 
-# Bivariate correlations 
+# Tabulated summaries 
 
 Table of correlations between factor scores of intercepts, slopes, residuals in a bivariate linear growth model. 
 
@@ -104,15 +104,6 @@ Table of correlations between factor scores of intercepts, slopes, residuals in 
 - [full][corr_full] - static tables in MS Word format, expanding the [focus][corr_focus] report with raw covariances, computed correlations, and confidence intervals. 
 - [dynamic][corr_dynamic] - HTML report with forest plots  and dynamic summary table 
 - [table data][table-data] - stand-alone `csv` files containing source data of the all above reports
-
-
-## Model form
-Any model in the collective can be specified by a form nested within the following general **specification**:  
-[![general_model_specification](../../../libs/images/general_model_specification.png)](../../../reports/model_specification/README.md)  
-</br>
-with **covariance structure** given as
-[![general_model_specification](../../../libs/images/specification_covariance_structure.png)](../../../reports/model_specification/README.md)  
-For  details see [model specification](../../../reports/model-specification/README.md).  
 
 # People 
 
