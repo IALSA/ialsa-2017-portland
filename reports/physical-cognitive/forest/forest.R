@@ -48,18 +48,14 @@ catalog_long <- readr::read_csv(path_catalog_long,col_names = TRUE)
 # ---- tweak-data --------------------
 # perform custom touch-up, local to physical-cognitive track
 catalog_wide <- catalog_wide %>%
-  # dplyr::filter(!process_a == "fev100") %>% # remove temporary items (usually for testing)
+  dplyr::filter(!process_a == "fev100") %>% # remove temporary items (usually for testing)
   dplyr::filter(model_type == "aehplus",model_number=="b1")  # limit the scope
 
-
-
-
-
-
+# catalog_wide %>% dplyr::glimpse()
 # ---- dummy -------------------
 # use this chunk to explore the data object 
 
-# library(dplyr)
+library(dplyr)
 # catalog_wide %>%
 #   filter(model_number=="b1") %>%
 #   filter(model_type %in% c("aehplus")) %>%
@@ -92,6 +88,7 @@ catalog_wide <- catalog_wide %>%
 #   dplyr::distinct(process_a, process_b)
 
 # ---- save-data-for-tables --------------------------
+# this chunk does not work yet - to be address with gait track
 # prepare data for saving
 # d_catalog <- catalog_wide %>%
 #   dplyr::mutate(
@@ -104,8 +101,10 @@ d_catalog <- catalog_wide
 for(track in c("gait","grip","pulmonary")){
   for(gender in c("andro")){
     # for(gender in c("male","female","andro")){
-    # for(format in c("meta"))
-    for(format in c("full","brief","meta"))
+    # for(format in c("full"))
+    # for(format in c("brief"))
+    for(format in c("meta"))
+    # for(format in c("full","brief","meta"))
       d_catalog %>%
       dplyr::filter(model_type == "aehplus",model_number=="b1") %>%
       # prettify_catalog() #%>%
@@ -135,16 +134,24 @@ get_freq <- function(d, varname){
 # ---- table-dynamic -----------------------------------------------------------
 # track = "gait"
 # track = "grip"
+# track = "all"
 # track = "pulmonary"
-track = "all"
 
 d <- catalog_wide %>%
   dplyr::filter(
     model_type  %in%  c("a","ae","aeh","aehplus","full"),
     model_number %in% c("b1")
   ) %>%
-  prettify_catalog() %>%
-  select_for_table(track = track, gender = "andro",format = "full", pretty_name=F)
+  prettify_catalog()  
+  # d %>% dplyr::glimpse()
+  if(track=="pulmonary"){ # WILL BE OBSOLETE ONCE ALL TRACKS ARE IN
+    d <- d %>% rename_domains(track) # must have renaming_labeling scheme for all tracks
+  } 
+# d %>% dplyr::glimpse()
+  d <- d %>% select_for_table(
+    track=track, gender = "andro", format = "full", pretty_name = FALSE, dynamic = TRUE
+  )
+
 
 selected_columns <- colnames(d)
 replace_italics <- function(x,  pattern="p"){
@@ -154,8 +161,8 @@ replace_italics <- function(x,  pattern="p"){
 d[,selected_columns] <- lapply(d[,selected_columns], replace_italics, pattern="p")
 
 static_variables <- c(
-  # "process_b_domain", "study_name",       "model_number",     "subgroup",
-  "domain",             "study_name",       "model_number",     "subgroup",
+  "process_b_domain", "study_name",       "model_number",     "subgroup",
+  # "domain",             "study_name",       "model_number",     "subgroup",
   "model_type",       "process_a",        "process_b",        "subject_count"
 )
 dynamic_variables <- setdiff(colnames(d), static_variables)
@@ -181,7 +188,7 @@ d <- d %>%
   dplyr::rename(
     N         = subject_count
     ,study     = study_name
-    ,domain    = domain
+    ,domain    = process_b_domain
     # ,physical  = process_a
     # ,cognitive = process_b
   ) %>%
@@ -214,24 +221,31 @@ d %>%
   # track = "gait"
   # track = "grip"
   # track = "pulmonary"
-  track = "all"
-  # path_graph_jpeg = paste0("./reports/correlation-3/forest-plot-",track,"/")
-  path_graph_jpeg = paste0("./reports/physical-physical/forest/forest-plot/")
+  # track = "all"
+  path_graph_jpeg = paste0("./reports/physical-cognitive/forest/forest-plot-",track,"/")
+  # path_graph_jpeg = paste0("./reports/physical-physical/forest/forest-plot/")
   # path_graph_jpeg = paste0("./reports/correlation-3/test/")
   for(i in c("intercept","slope","residual")){
     # i = "intercept"
     data_forest <- catalog_wide %>%
-      prettify_catalog() %>%
+      prettify_catalog() 
+    # data_forest %>% dplyr::glimpse()
+    if(track=="pulmonary"){ # WILL BE OBSOLETE ONCE ALL TRACKS ARE IN
+      data_forest <- data_forest %>% rename_domains(track) # must have renaming_labeling scheme for all tracks
+    } 
+    # data_forest %>% dplyr::glimpse()
       # dplyr::filter(
       #   model_number == "b1"
       #   ,  model_type   == "aehplus"
       #   ,! process_b    == "trailsb"
       # ) %>%
+    data_forest <- data_forest %>% 
       get_forest_data(track = track,index = i) %>%
       tidyr::drop_na(mean)
     colnames(data_forest)
     # data_forest %>% get_freq()
-    (domain_cycle <- setdiff(unique(data_forest$domain),NA))
+    (domain_cycle <- setdiff(unique(data_forest$process_b_domain),NA))
+    # (domain_cycle <- setdiff(unique(data_forest$domain),NA))
     (subgroup_cycle <- unique(data_forest$subgroup))
     for(dom in domain_cycle){
       # cat("\n##",dom,"\n")
@@ -241,7 +255,8 @@ d %>%
         # (gender = "female")
         # n_lines = 13
         (n_lines <- data_forest %>%
-           dplyr::filter(domain==dom,subgroup==gender) %>%
+           # dplyr::filter(domain==dom,subgroup==gender) %>%
+           dplyr::filter(process_b_domain==dom,subgroup==gender) %>%
            nrow())
         # save graphic
         # make sure it conforms to `track-domain-gender-index` formula
@@ -268,15 +283,16 @@ d %>%
 # track = "gait"
 # track = "grip"
 # track = "pulmonary"
-path_folder <- paste0("./reports/physical-physical/forest/forest-plot")
+path_folder <- paste0("./reports/physical-cognitive/forest/forest-plot","-",track)
 jpegs <- list.files(path_folder, full.names = T)
+# jpegs <- list.files(path_folder, full.names = T)
 lst <- list()
-regex_pattern <- "(\\w+)-(.+)-(\\w+)-(\\w+).jpg$"
+regex_pattern <- "(.+)-(\\w+)-(\\w+).jpg$"
 for(i in seq_along(jpegs)){
   # (lst[["track"]][i]    = sub(regex_pattern,"\\1", basename(jpegs[i]) ) )
-  (lst[["domain"]][i]   = sub(regex_pattern,paste0("\\1","-","\\2"), basename(jpegs[i]) ) )
-  (lst[["subgroup"]][i] = sub(regex_pattern,"\\3", basename(jpegs[i]) ) )
-  (lst[["index"]][i]    = sub(regex_pattern,"\\4", basename(jpegs[i]) ) )
+  (lst[["domain"]][i]   = sub(regex_pattern,paste0("\\1"), basename(jpegs[i]) ) )
+  (lst[["subgroup"]][i] = sub(regex_pattern,"\\2", basename(jpegs[i]) ) )
+  (lst[["index"]][i]    = sub(regex_pattern,"\\3", basename(jpegs[i]) ) )
   (lst[["path"]][i]     = sub("[./]","../../..",jpegs[i]))
 }
 ds_jpegs <- dplyr::bind_rows(lst)
@@ -311,6 +327,7 @@ for(ind in index_cycle){
 
 
 # ---- table-static-full ------------------------------------------------------------
+# track = "pulmonary"
 cat("\n# Group by domain\n")
 for(gender in c("male","female")){
   # gender = "male"
@@ -321,14 +338,21 @@ for(gender in c("male","female")){
       model_type == "aehplus",
       model_number == "b1"
     ) %>%
-    prettify_catalog() %>%
-    select_for_table(track="all",gender = gender,format = "full")
-  # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
+    prettify_catalog() 
+  # d %>% dplyr::glimpse()
+  if(track=="pulmonary"){ # WILL BE OBSOLETE ONCE ALL TRACKS ARE IN
+    d <- d %>% rename_domains(track) # must have renaming_labeling scheme for all tracks
+  } 
+  # d %>% dplyr::glimpse()
+  d <- d %>% select_for_table(
+    track="pulmonary",gender = gender, format = "full", pretty_name = TRUE
+  )
+  # d %>% dplyr::glimpse()
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    dplyr::arrange(domain,study,process_a, process_b ) %>%
-        knitr::kable(
+    dplyr::arrange(domain,study,physical, cognitive ) %>%
+    knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c",  "r","l","r","l",  "r","l","r","l",  "r","l","r","l") # cognitive full
       # align      = c(    "l","r","l","c",  "r","l","r","l",  "r","l","r","l", "r","l","r","l") # physical full
@@ -344,13 +368,20 @@ for(gender in c("male","female")){
       model_type == "aehplus",
       model_number == "b1"
     ) %>%
-    prettify_catalog() %>%
-    select_for_table(track="all",gender = gender,format = "full")
-  # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
+    prettify_catalog() 
+  # d %>% dplyr::glimpse()
+  if(track=="pulmonary"){ # WILL BE OBSOLETE ONCE ALL TRACKS ARE IN
+    d <- d %>% rename_domains(track) # must have renaming_labeling scheme for all tracks
+  } 
+  # d %>% dplyr::glimpse()
+  d <- d %>% select_for_table(
+    track="pulmonary",gender = gender, format = "full", pretty_name = TRUE
+  )
+  # d %>% dplyr::glimpse()
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    dplyr::arrange(study,domain, process_a, process_b ) %>%
+    dplyr::arrange(study, domain, physical, cognitive ) %>%
     knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c",  "r","l","r","l",  "r","l","r","l", "r","l","r","l") # cognitive full
@@ -370,13 +401,20 @@ for(gender in c("male","female")){
       model_type == "aehplus",
       model_number == "b1"
     ) %>%
-    prettify_catalog() %>%
-    select_for_table(track="all",gender = gender,format = "focus")
-  # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
+    prettify_catalog() 
+  # d %>% dplyr::glimpse()
+  if(track=="pulmonary"){ # WILL BE OBSOLETE ONCE ALL TRACKS ARE IN
+    d <- d %>% rename_domains(track) # must have renaming_labeling scheme for all tracks
+  } 
+  # d %>% dplyr::glimpse()
+  d <- d %>% select_for_table(
+    track="pulmonary",gender = gender, format = "full", pretty_name = TRUE
+  )
+  # d %>% dplyr::glimpse()
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    dplyr::arrange(domain,study,process_a, process_b ) %>%
+    dplyr::arrange(domain,study, physical, cognitive ) %>%
     knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c", "l","l","l") # cognitive
@@ -392,13 +430,20 @@ for(gender in c("male","female")){
       model_type == "aehplus",
       model_number == "b1"
     ) %>%
-    prettify_catalog() %>%
-    select_for_table(track="all",gender = gender,format = "focus")
-  # if(track=="pulmonary"){d <- d %>% rename_domains(track)}
+    prettify_catalog() 
+  # d %>% dplyr::glimpse()
+  if(track=="pulmonary"){ # WILL BE OBSOLETE ONCE ALL TRACKS ARE IN
+    d <- d %>% rename_domains(track) # must have renaming_labeling scheme for all tracks
+  } 
+  # d %>% dplyr::glimpse()
+  d <- d %>% select_for_table(
+    track="pulmonary",gender = gender, format = "full", pretty_name = TRUE
+  )
+  # d %>% dplyr::glimpse()
   d <- d %>%
     dplyr::filter(subgroup %in% gender) %>%
     dplyr::select(-model_number, -subgroup, -model_type) %>%
-    dplyr::arrange(study, domain, process_a, process_b ) %>%
+    dplyr::arrange(study, domain, physical, cognitive ) %>%
     knitr::kable(
       format     = print_format,
       align      = c("l","l","r","l","c", "l","l","l") # cognitive
@@ -411,8 +456,8 @@ for(gender in c("male","female")){
 
 # ---- publish --------------
 # WORD reports
-path_full    <- "./reports/physical-physical/forest/forest-full.Rmd"
-path_focus   <- "./reports/physical-physical/forest/forest-focus.Rmd"
+path_full    <- "./reports/physical-cognitive/forest/forest-pulmonary-full.Rmd"
+path_focus   <- "./reports/physical-cognitive/forest/forest-pulmonary-focus.Rmd"
 # Chose production
 # allReports <- c(path_full)
 # allReports <- c(path_focus)
@@ -437,7 +482,7 @@ for( pathFile in pathFilesToBuild ) {
 
 
 # HTML Reports
-path_summary <- "./reports/physical-physical/forest/forest-summary.Rmd"
+path_summary <- "./reports/physical-cognitive/forest/forest-pulmonary-summary.Rmd"
 # Chose production
 allReports <- c(path_summary)
 
