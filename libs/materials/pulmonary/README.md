@@ -1,11 +1,20 @@
 Pulmonary Function and Cognition
 ----
 
-Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G., Koval, A., & Hofer, S. M. (2018). [A MULTI-STUDY COORDINATED META-ANALYSIS OF PULMONARY FUNCTION AND COGNITION IN AGING][citation]. Innovation in Aging, 2(suppl_1), 616-616. 
+Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G., Koval, A., & Hofer, S. M. (2018). [A MULTI-STUDY COORDINATED META-ANALYSIS OF PULMONARY FUNCTION AND COGNITION IN AGING][citation]. Innovation in Aging, 2 (suppl_1), 616-616. 
 
 [citation]:https://academic.oup.com/innovateage/article/2/suppl_1/616/5170596
 
-## Supplemental Materials
+
+# Table of Contents
+
+- Supplemental Materials
+- Figures
+- Estimation results
+- Tabulated summaries
+- People 
+
+# Supplemental Materials
 
 - Forest plosts of all [Intercepts][intercepts] (pdf)
 - Forest plosts of all [Residuals][residuals] (pdf)
@@ -14,6 +23,8 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 [intercepts]:Intercept-Forest-Plots.pdf
 [residuals]:Residual-Forest-Plots.pdf
 [suptables]:Supplemental-Tables.pdf
+
+# Figures
 
 ## Figure 1
 
@@ -65,7 +76,7 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 [fig8]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/pulmonary/Figure-8-ISR-Aggregate.jpg
 
 
-## Estimation results
+# Estimation results
 
 Along with the study descriptives, the following table provides link to reports tabulating estimation results from each of model. To examine the raw MPlus output files, from which these estimates were extracted, please access [a dedicated shared location][model-output] after the link.
 
@@ -84,7 +95,7 @@ Along with the study descriptives, the following table provides link to reports 
 
 <sup>1</sup> - Descriptives available after the link.
 
-## Bivariate correlations
+# Bivariate correlations 
 
 Table of correlations between factor scores of intercepts, slopes, residuals in a bivariate linear growth model. 
 
