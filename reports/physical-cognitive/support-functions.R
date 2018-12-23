@@ -189,7 +189,8 @@ select_for_table <- function(
   track,          # gait, grip, pulmonary : selects process a / PHYSICAL MEASURE
   gender = "andro", # andro, male, female : selects subgroup
   format = "full",   # full, focus, brief : selects columns to display
-  pretty_name = TRUE # columns names are pretty, ready for table
+  pretty_name = TRUE, # columns names are pretty, ready for table
+  dynamic = FALSE # temp hack for enabling dynamic summary
 ){
   # browser()
   d1 <- ds_cat
@@ -216,22 +217,34 @@ select_for_table <- function(
   }
 
   if(format=="full"){
-    d4 <- d3 %>%
-      dplyr::select(
-        process_b_domain, study_name,
-        model_number, subgroup, model_type, process_a, process_b, subject_count,
-        tau_levels, er_levels, er_levels_ci, cr_levels,
-        tau_slopes, er_slopes, er_slopes_ci, cr_slopes,
-        tau_resid,  er_resid, er_resid_ci, cr_resid
-      ) 
-    
-     if(pretty_name){
+
+     if(dynamic){ # temp hack for dynamic summary report
+       d4 <- d3 %>% 
+         dplyr::select(
+           process_b_domain, study_name,
+           model_number, subgroup, model_type, process_a, process_b, subject_count,
+           tau_levels, er_levels, er_levels_ci, cr_levels,
+           tau_slopes, er_slopes, er_slopes_ci, cr_slopes,
+           tau_resid,  er_resid, er_resid_ci, cr_resid
+         )
+     }else(
+       d4 <- d3 %>% 
+         dplyr::select(
+           process_b_domain_label, study_name,
+           model_number, subgroup, model_type, process_a, process_b_label, subject_count,
+           tau_levels, er_levels, er_levels_ci, cr_levels,
+           tau_slopes, er_slopes, er_slopes_ci, cr_slopes,
+           tau_resid,  er_resid, er_resid_ci, cr_resid
+         )
+     )
+     if(pretty_name){ # will not work with dynamic == TRUE
       d4 <- d4 %>%
         dplyr::rename_(
+          "domain"              = "process_b_domain_label", # ID
           "study"               = "study_name",
           "$n$"                 = "subject_count",
-          # "Process A"           = "process_a",
-          # "Process B"           = "process_b",
+          "physical"            = "process_a",
+          "cognitive"           = "process_b_label",
           "Cov(Levels)"         = "tau_levels",       # Covariance             est(se)pval
           "Cov(Slopes)"         = "tau_slopes",
           "Cov(Residuals)"      = "tau_resid",
@@ -250,13 +263,16 @@ select_for_table <- function(
   if(format=="focus"){
     d4 <- d3 %>%
       dplyr::select(
-        process_b_domain, study_name,
-        model_number, subgroup, model_type, process_a, process_b, subject_count,
+        process_b_domain_label, study_name,
+        model_number, subgroup, model_type, process_a, process_b_label, subject_count,
         er_levels, er_slopes, er_resid
       ) %>%
       dplyr::rename_(
+        "domain"              = "process_b_domain_label", # ID
         "study"               = "study_name",
         "$n$"                 = "subject_count",
+        "physical"            = "process_a",
+        "cognitive"           = "process_b_label",
         "Corr(Levels)Est"     = "er_levels",        # Correlation Estimated  est(se)pval
         "Corr(Slopes)Est"     = "er_slopes",
         "Corr(Residuals)Est"  = "er_resid"
@@ -265,8 +281,8 @@ select_for_table <- function(
   if(format=="brief"){
     d4 <- d3 %>%
       dplyr::select(
-        process_b_domain, study_name,
-        model_number, subgroup, model_type, process_a, process_b, subject_count,
+        process_b_domain_label, study_name,
+        model_number, subgroup, model_type, process_a, process_b_label, subject_count,
         er_tau_00_est,   er_tau_00_se,   er_tau_00_pval,   er_tau_00_ci95lo,   er_tau_00_ci95hi,
         er_tau_11_est,   er_tau_11_se,   er_tau_11_pval,   er_tau_11_ci95lo,   er_tau_11_ci95hi,
         er_sigma_00_est, er_sigma_00_se, er_sigma_00_pval, er_sigma_00_ci95lo, er_sigma_00_ci95hi
@@ -280,16 +296,20 @@ select_for_table <- function(
         subgroup = as.character(subgroup)
       ) %>%
       dplyr::select(
-        process_b_domain, study_name, process_a, process_b, subgroup, subject_count,
+        process_b_domain_label, study_name, process_a, process_b_label, subgroup, subject_count,
         # dense       point estimate   st.error/lower ci   p-value/upper ci
         tau_levels,   ab_tau_00_est,   ab_tau_00_se,       ab_tau_00_pval,
         tau_slopes,   ab_tau_11_est,   ab_tau_11_se,       ab_tau_11_pval,
         tau_resid,    ab_sigma_00_est, ab_sigma_00_se,     ab_sigma_00_pval
       ) %>%
       dplyr::rename_(
-        "study" = "study_name",
-        "sex"   = "subgroup",
-        "$n$"   = "subject_count"
+        "domain"              = "process_b_domain_label", # ID
+        "study"               = "study_name",
+        "$n$"                 = "subject_count",
+        "physical"            = "process_a",
+        "cognitive"           = "process_b_label",
+        "sex"                 = "subgroup"
+
       )
 
   }
@@ -312,8 +332,9 @@ save_corr_table <- function(
   format,
   folder
 ){
+  # browser()
   d <- catalog_pretty %>%
-    select_for_table(track=track, gender=gender, format=format)
+    select_for_table(track=track, gender=gender, format=format, pretty_name = FALSE, dynamic = TRUE)
   # folder <- "./reports/correlation-3/summary-data/"
   # path <- paste0(folder,track,"-",gender,"-",format,".csv")
   path <- paste0(folder,track,"-",format,".csv")
@@ -399,7 +420,7 @@ get_forest_data <- function(
         # physical, cognitive, 
         process_a, process_b, 
         # process_b,n, mean, lower, upper, dense
-        process_b_domain,n, mean, lower, upper, dense
+        process_b_domain, n, mean, lower, upper, dense
       )
   return(d2)
 }
@@ -407,34 +428,40 @@ get_forest_data <- function(
 # data_forest <- get_forest_data(catalog_pretty,"pulmonary","intercept")
 
 # ---- rename-domains -------------
-# rename_domains <- function(
-#   catalog_pretty_selected#,
-#   # track_name
-# ){
-#   # browser()
-#   # catalog_pretty_selected <- catalog
-#   # track_name = "pulmonary"
-#   # path_stencil = "./reports/correlation-3/rename-domains-"
-#   # path = paste0(path_stencil,track_name,".csv")
-#   path = "./reports/correlation-3/domain-grouping.csv"
-#
-#   d_rules <- readr::read_csv(path)#%>%
-#     # dplyr::select(domain, domain_new, study, cognitive)
-#
-#   # t <- table(d$domain, d$study); t[t==0]<-"."; t
-#   # join the model data frame to the conversion data frame.
-#   d <- catalog_pretty_selected %>%
-#     dplyr::left_join(d_rules )
-#   # verify
-#   # t <- table(d$domain, d$study);t[t==0]<-".";t
-#   # t <- table(d$domain_new, d$study);t[t==0]<-".";t
-#   d <- d %>%
-#     dplyr::mutate(
-#       domain = domain_new
-#     ) %>%
-#     dplyr::select(-domain_new)
-#   return(d)
-# }
+rename_domains <- function(
+  catalog_pretty_selected,
+  track_name
+){
+  # browser()
+  # catalog_pretty_selected <- catalog_wide
+  # track_name = "pulmonary"
+  # path_stencil = "./reports/correlation-3/rename-domains-"
+  # path = paste0(path_stencil,track_name,".csv")
+  # path = "./reports/correlation-3/domain-grouping.csv"
+  if(track_name == "pulmonary"){
+   path = "./reports/physical-cognitive/seeds-pulmonary/pulmonary-domain-structure-dead.csv"
+  }
+
+  d_rules <- readr::read_csv(path)#%>%
+    # dplyr::select(domain, domain_new, study, cognitive)
+  # d_rules %>% dplyr::glimpse()
+  # t <- table(d$process_b_domain, d$study); t[t==0]<-"."; t
+  # join the model data frame to the conversion data frame.
+  d <- catalog_pretty_selected %>%
+    dplyr::left_join(
+      d_rules
+      ,by = c("study_name","process_b","process_b_domain")
+    )
+  # verify
+  # t <- table(d$process_b_domain, d$study_name);t[t==0]<-".";t
+  # t <- table(d$process_b_domain_new, d$study_name);t[t==0]<-".";t
+  d <- d %>%
+    dplyr::mutate(
+      process_b_domain = process_b_domain_new
+    ) %>%
+    dplyr::select(-process_b_domain_new)
+  return(d)
+}
 
 print_forest_plot <- function(
   data_forest,
