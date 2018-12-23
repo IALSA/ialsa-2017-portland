@@ -1,6 +1,13 @@
 Project: Pulmonary function and cognition
 ----
 
+## Publication
+
+Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G., Koval, A., & Hofer, S. M. (2018). [A MULTI-STUDY COORDINATED META-ANALYSIS OF PULMONARY FUNCTION AND COGNITION IN AGING][citation]. Innovation in Aging, 2(suppl_1), 616-616. ( [figures and supplementary materials][supmat])
+
+[citation]:https://academic.oup.com/innovateage/article/2/suppl_1/616/5170596
+[supmat]:../../libs/materials/pulmonary/README.md
+
 
 ## Estimation results
 
