@@ -8,7 +8,7 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 ## Supplemental Materials
 
 - Forest plosts of all [Intercepts][intercepts] (pdf)
-- Forest plosts of all [Slopes][residuals] (pdf)
+- Forest plosts of all [Residuals][residuals] (pdf)
 - [Supplemental Tables][suptables] (pdf)
 
 [intercepts]:Intercept-Forest-Plots.pdf
