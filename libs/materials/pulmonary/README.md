@@ -26,7 +26,7 @@ Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G.
 
 [![fig2][fig2]][fig2]
 
-[fig1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/pulmonary/Figure-1-Mental-Status.jpg
+[fig2]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/pulmonary/Figure-1-Mental-Status.jpg
 
 ## Figure 3
 
