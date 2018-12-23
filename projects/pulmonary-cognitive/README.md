@@ -1,11 +1,12 @@
 Project: Pulmonary function and cognition
 ----
-Table of correlations between factor scores of intercepts, slopes, residuals in a bivariate linear growth model. 
-- [focus][corr_focus] - static tables in MS Word format, focusing on estimated correlations 
-- [full][corr_full] - static tables in MS Word format, expanding the [focus][corr_focus] report with raw covariances, computed correlations, and confidence intervals. 
-- [dynamic][corr_dynamic] - forest plots  and dynamic summary table 
-- [table data][table-data] - stand-alone `csv` files containing source data of the all above reports
 
+
+## Estimation results
+
+Along with the study descriptives, the following table provides link to reports tabulating estimation results from each of model. To examine the raw MPlus output files, from which these estimates were extracted, please download [a dedicated archive][model-output].
+
+[model-output]:https://drive.google.com/drive/folders/1VFmwidKSDKGnLuk24ZPg91xY2iL9kDAH?usp=sharing
 
 |Study<sup>1</sup> | Initial Summary Report |
 |---|---|
@@ -19,6 +20,16 @@ Table of correlations between factor scores of intercepts, slopes, residuals in 
 [SATSA][satsa_table_1]  | [word][satsa_word] or [html][satsa_html]|
 
 <sup>1</sup> - Descriptives available after the link.
+
+## Bivariate correlations
+
+Table of correlations between factor scores of intercepts, slopes, residuals in a bivariate linear growth model. 
+
+
+- [focus][corr_focus] - static tables in MS Word format, focusing on estimated correlations 
+- [full][corr_full] - static tables in MS Word format, expanding the [focus][corr_focus] report with raw covariances, computed correlations, and confidence intervals. 
+- [dynamic][corr_dynamic] - HTML report with forest plots  and dynamic summary table 
+- [table data][table-data] - stand-alone `csv` files containing source data of the all above reports
 
 ## Slopes across domains
 [![female slopes](https://github.com/IALSA/IALSA-2015-Portland/blob/master/reports/domain-map/figure-png/print-domain-map-5.png)](https://raw.githubusercontent.com/IALSA/IALSA-2015-Portland/master/reports/domain-map/figure-png/print-domain-map-5.png)
