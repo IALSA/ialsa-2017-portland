@@ -6,7 +6,7 @@ output:
     reference_docx: rmd-style.docx
     toc: yes
   html_document:
-    css: ~/GitHub/IALSA-2015-Portland/libs/css/sidebar-simple.css
+    css: ~/GitHub/ialsa/ialsa-2017-portland/libs/css/sidebar-simple.css
     keep_md: yes
     toc: yes
 date: 'Date: `r Sys.Date()`'
