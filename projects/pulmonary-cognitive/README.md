@@ -5,8 +5,6 @@ Table of correlations between factor scores of intercepts, slopes, residuals in 
 - [full][corr_full] - static tables in MS Word format, expanding the [focus][corr_focus] report with raw covariances, computed correlations, and confidence intervals. 
 - [dynamic][corr_dynamic] - forest plots  and dynamic summary table 
 - [table data][table-data] - stand-alone `csv` files containing source data of the all above reports
-- [domain map][domain_map] - examine BISR estimates across cognitive domains (under construction at the moment)
-- [meta analyis spreadsheet][meta-analysis] - meta analysis conducted outside of R, using Excel macro
 
 
 |Study<sup>1</sup> | Initial Summary Report |
@@ -27,13 +25,13 @@ Table of correlations between factor scores of intercepts, slopes, residuals in 
 
 [![male slopes](https://github.com/IALSA/IALSA-2015-Portland/blob/master/reports/domain-map/figure-png/print-domain-map-17.png)](https://raw.githubusercontent.com/IALSA/IALSA-2015-Portland/master/reports/domain-map/figure-png/print-domain-map-17.png)
 
-## Model
-All fitted models can be specified by a form nested within the following general **specification**:  
-[![general_model_specification](https://github.com/IALSA/IALSA-2015-Portland/blob/master/libs/images/general_model_specification.png)](https://github.com/IALSA/IALSA-2015-Portland/blob/master/reports/model-specification/README.md)
+## Model form
+Any model in the collective can be specified by a form nested within the following general **specification**:  
+[![general_model_specification](./libs/images/general_model_specification.png)](./reports/model_specification/README.md)  
 </br>
 with **covariance structure** given as
-[![general_model_specification](https://github.com/IALSA/IALSA-2015-Portland/blob/master/libs/images/specification_covariance_structure.png)](https://github.com/IALSA/IALSA-2015-Portland/blob/master/reports/model-specification/README.md)  
-For  details see [model specification](../../reports/model-specification/README.md).  
+[![general_model_specification](./libs/images/specification_covariance_structure.png)](./reports/model_specification/README.md)  
+For  details see [model specification](./reports/model-specification/README.md).  
 
 # People 
 
@@ -85,27 +83,27 @@ For  details see [model specification](../../reports/model-specification/README.
 [satsa_table_1]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/libs/materials/table_1_descriptives/Table1_SATSA_Descriptives_IALSA_Portland.pdf  
 
 
-  [eas_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-eas.docx     
- [elsa_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-elsa.docx   
-  [hrs_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-hrs.docx     
- [ilse_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-ilse.docx   
- [lasa_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-lasa.docx   
-  [nas_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nas.docx   
-[nuage_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nuage.docx 
-  [map_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-map.docx     
- [octo_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-octo.docx   
-[satsa_word]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-satsa.docx   
+  [eas_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-eas.docx     
+ [elsa_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-elsa.docx   
+  [hrs_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-hrs.docx     
+ [ilse_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-ilse.docx   
+ [lasa_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-lasa.docx   
+  [nas_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nas.docx   
+[nuage_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nuage.docx 
+  [map_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-map.docx     
+ [octo_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-octo.docx   
+[satsa_word]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-satsa.docx   
   
-  [eas_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-eas.html     
- [elsa_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-elsa.html   
-  [hrs_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-hrs.html     
- [ilse_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-ilse.html   
- [lasa_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-lasa.html   
-  [map_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-map.html     
-  [nas_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nas.html   
-[nuage_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nuage.html 
- [octo_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-octo.html   
-[satsa_html]:https://rawgit.com/IALSA/IALSA-2015-Portland/master/reports/physical-cognitive/seeds-pulmonary/seed-satsa.html 
+  [eas_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-eas.html     
+ [elsa_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-elsa.html   
+  [hrs_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-hrs.html     
+ [ilse_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-ilse.html   
+ [lasa_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-lasa.html   
+  [map_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-map.html     
+  [nas_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nas.html   
+[nuage_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-nuage.html 
+ [octo_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-octo.html   
+[satsa_html]:https://raw.githack.com/IALSA/ialsa-2017-portland/master/reports/physical-cognitive/seeds-pulmonary/seed-satsa.html 
 
 [eduggan]:eduggan@uvic.ca                
 [piccinin]:piccinin@uvic.ca                
