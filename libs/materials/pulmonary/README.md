@@ -1,10 +1,10 @@
 Pulmonary Function and Cognition
 ----
 
-Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G., Koval, A., & Hofer, S. M. (2018). [A MULTI-STUDY COORDINATED META-ANALYSIS OF PULMONARY FUNCTION AND COGNITION IN AGING][citation]. Innovation in Aging, 2 (suppl_1), 616-616. 
+Emily C Duggan, Andrea M Piccinin, Sean Clouston, Andriy V Koval, Annie Robitaille, Andrea R Zammit, Chenkai Wu, Cassandra L Brown, Lewina O Lee, Deborah Finkel, William H Beasley, Jeffrey Kaye, Graciela Muniz-Terrera, Mindy Katz, Richard B Lipton, Dorly Deeg, David A Bennett, Marcus Praetorius Björk, Boo Johansson, Avron Spiro, Jennifer Weuve, Scott M Hofer; A Multi-Study Coordinated Meta-Analysis of Pulmonary Function and Cognition in Aging, _The Journals of Gerontology: Series A_, glz057, https://doi.org/10.1093/gerona/glz057 ( [figures and supplemental materials][supmat])
 
-[citation]:https://academic.oup.com/innovateage/article/2/suppl_1/616/5170596
-
+[citation-pulmonary]:https://doi.org/10.1093/gerona/glz057
+[supmat]:libs/materials/pulmonary/README.md
 
 # Table of Contents
 
