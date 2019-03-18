@@ -7,9 +7,9 @@ IALSA is funded through an NIH/NIA Program Project Grant ([P01AG043362](https://
 
 IALSA-2017-Portland workshop performs a **coordinated analysis with replication (CAwR)** across 10 longitudinal studies investigating the decline in physical and cognitive functioning during later adulthood using bivariate growth curve models. 
 
-* Duggan, E. C., Piccinin, A. M., Clouston, S., Koval, A. V., Robitalle, A., Zammit, A. R., Wu, C., Brown, C. L., Lee, L. O., Finkel, D., Beasley, W. H., Kaye, J., Muniz Terrera, G., Katz, M., Lipton, R. B., Deeg, D., Bennett, D. A., Praetorius Björk, M., Johansson, B., Spiro III, A., Weuve, J., & Hofer, S. M. (2019). [A multi-study coordinated meta-analysis of pulmonary function and cognition in aging.][citation-pulmonary] _The Journals of Gerontology Series A: Medical Sciences, forthcoming._( [figures and supplemental materials][supmat])
+* Emily C Duggan, Andrea M Piccinin, Sean Clouston, Andriy V Koval, Annie Robitaille, Andrea R Zammit, Chenkai Wu, Cassandra L Brown, Lewina O Lee, Deborah Finkel, William H Beasley, Jeffrey Kaye, Graciela Muniz-Terrera, Mindy Katz, Richard B Lipton, Dorly Deeg, David A Bennett, Marcus Praetorius Björk, Boo Johansson, Avron Spiro, Jennifer Weuve, Scott M Hofer; A Multi-Study Coordinated Meta-Analysis of Pulmonary Function and Cognition in Aging, _The Journals of Gerontology: Series A_, glz057, https://doi.org/10.1093/gerona/glz057 ( [figures and supplemental materials][supmat])
 
-[citation-pulmonary]:https://academic.oup.com/innovateage/article/2/suppl_1/616/5170596
+[citation-pulmonary]:https://doi.org/10.1093/gerona/glz057
 [supmat]:libs/materials/pulmonary/README.md
 
 
