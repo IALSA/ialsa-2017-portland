@@ -1,7 +1,21 @@
 Pulmonary Function and Cognition
 ----
 
+# Published works
+
 Emily C Duggan, Andrea M Piccinin, Sean Clouston, Andriy V Koval, Annie Robitaille, Andrea R Zammit, Chenkai Wu, Cassandra L Brown, Lewina O Lee, Deborah Finkel, William H Beasley, Jeffrey Kaye, Graciela Muniz-Terrera, Mindy Katz, Richard B Lipton, Dorly Deeg, David A Bennett, Marcus Praetorius Björk, Boo Johansson, Avron Spiro, Jennifer Weuve, Scott M Hofer; A Multi-Study Coordinated Meta-Analysis of Pulmonary Function and Cognition in Aging, _The Journals of Gerontology: Series A_, glz057, https://doi.org/10.1093/gerona/glz057 ( [figures and supplemental materials][supmat])
+
+
+Duggan, E. C., Graham, R. B., Piccinin, A. M., Jenkins, N. D., Clouston, S., Muniz Terrera, G., & Hofer, S. M. (2018). A systematic review of pulmonary function and cognition in aging. The Journals of Gerontology Series B: Psychological Sciences, online first. doi:10.1093/geronb/gby128
+
+### Published Abstracts and Presentations
+
+Duggan, E. C., Piccinin, A. M., Robitaille, A., Zammit, A. R., Muniz-Terrera, G. (2018). A multi-study coordinated meta-analysis of pulmonary function and cognition in aging. In G. Muniz-Terra (Chair), Symposium: Aging-related dynamics between physical functioning and cognitive abilities across longitudinal studies. Presented November 17th, 2018 at the Gerontological Society of America Annual Scientific Meeting, Boston, MA.
+
+Graham, R. B., Duggan, E. C., Piccinin, A. M., & Hofer, S. M. (2015). An examination of the longitudinal relationship between cognition and pulmonary function: A systematic review. Presented November 19th, 2015 at the Annual Scientific Meeting of the Gerontological Society of America, Orlando, FL.
+
+Duggan, E. C., Graham, R., Piccinin, A. M., & Hofer, S. M. (2015). Examining the longitudinal relationship between pulmonary function and cognition. Presented February 23rd, 2015 at the IALSA Analysis Workshop: Dynamics of Physical and Cognitive Functioning, Portland, OR.
+
 
 [citation-pulmonary]:https://doi.org/10.1093/gerona/glz057
 [supmat]:libs/materials/pulmonary/README.md
